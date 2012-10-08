@@ -1,0 +1,14 @@
+package wowboss;
+
+message NMHello {
+  required int32 version = 1;
+}
+
+message NetMessage {
+  enum MessageType {
+    HELLO = 0;
+  }
+
+  required MessageType id = 1;
+  optional NMHello hello = 2;
+}

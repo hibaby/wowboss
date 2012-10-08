@@ -1,0 +1,17 @@
+# 以'#' 开始的行，被视为注释.
+# 忽略目录
+ServerDemo/Debug
+ServerDemo/Common/Debug
+ServerDemo/ServerDemo/Debug
+ServerDemo/testProtobuf/Debug
+ServerDemo/Release
+ServerDemo/Common/Release
+ServerDemo/ServerDemo/Release
+ServerDemo/testProtobuf/Release
+
+ServerDemo/ipch
+
+# 忽略vs2010文件
+*.sdf
+*.suo
+*.opensdf

@@ -1,0 +1,40 @@
+[12:48][Arcemu][1970-01-01 08:00:00] 
+[12:48][Arcemu] [ERR] d:\projects\serverdemo\serverdemo\serverdemo\net.cpp:42 CNet::Startup /************************************************
+Version:       2,1
+HighVersion:   2,2
+MaxSockets:    0
+MaxUdpDg:      0
+Description:   WinSock 2.0
+SystemStatus:  Running
+/************************************************
+
+[12:49][Arcemu][1970-01-01 08:00:00] 
+[12:49][Arcemu] [ERR] d:\projects\serverdemo\serverdemo\serverdemo\net.cpp:42 CNet::Startup /************************************************
+Version:       2,1
+HighVersion:   2,2
+MaxSockets:    0
+MaxUdpDg:      0
+Description:   WinSock 2.0
+SystemStatus:  Running
+/************************************************
+
+[12:50][Arcemu][1970-01-01 08:00:00] 
+[12:50][Arcemu] [ERR] d:\projects\serverdemo\serverdemo\serverdemo\net.cpp:42 CNet::Startup /************************************************
+Version:       2,1
+HighVersion:   2,2
+MaxSockets:    0
+MaxUdpDg:      0
+Description:   WinSock 2.0
+SystemStatus:  Running
+/************************************************
+
+[12:53][Arcemu][1970-01-01 08:00:00] 
+[12:53][Arcemu] [ERR] d:\projects\serverdemo\serverdemo\serverdemo\net.cpp:42 CNet::Startup /************************************************
+Version:       2,1
+HighVersion:   2,2
+MaxSockets:    0
+MaxUdpDg:      0
+Description:   WinSock 2.0
+SystemStatus:  Running
+/************************************************
+
