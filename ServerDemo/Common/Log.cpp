@@ -52,20 +52,20 @@ initialiseSingleton(oLog);
 time_t UNIXTIME;
 tm g_localTime;
 
-void oLog::outFile(FILE* file, char* msg, const char* source)
+void oLog::outFile(FILE* file, const char* flag, const char* msg, const char* source)
 {
 	char time_buffer[TIME_FORMAT_LENGTH];
 	Time( time_buffer );
 
 	if ( source != NULL )
 	{
-		fprintf( file, "%s%s: %s\n", time_buffer, source, msg );
-		printf( "%s%s: %s\n", time_buffer, source, msg );
+		fprintf( file, "%s %s %s: %s\n", time_buffer, flag, source, msg );
+		printf( "%s %s: %s\n", time_buffer, flag, msg );
 	}
 	else
 	{
-		fprintf( file, "%s%s\n", time_buffer, msg );
-		printf( "%s%s\n", time_buffer, msg );
+		fprintf( file, "%s %s: %s\n", time_buffer, flag, msg );
+		printf( "%s %s: %s\n", time_buffer, flag, msg );
 	}
 }
 
@@ -86,6 +86,15 @@ void oLog::Time(char* buffer)
 	}
 }
 
+#define OutFile(__outfile, __str, __flag) {					\
+	char buf[BUFFER_LENGTH];								\
+	va_list ap;												\
+	va_start( ap, __str );									\
+	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, __str, ap );	\
+	va_end( ap );											\
+	outFile( __outfile, __flag, buf );						\
+}
+
 void oLog::outString(const char* str, ...)
 {
 	if ( m_normalFile == NULL )
@@ -93,14 +102,7 @@ void oLog::outString(const char* str, ...)
 		return;
 	}
 
-	char buf[BUFFER_LENGTH];
-	va_list ap;
-
-	va_start( ap, str );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, str, ap );
-	va_end( ap );
-
-	outFile( m_normalFile, buf );
+	OutFile( m_normalFile, str, "[STR]" );
 }
 
 void oLog::outError(const char* err, ...)
@@ -110,14 +112,7 @@ void oLog::outError(const char* err, ...)
 		return;
 	}
 
-	char buf[BUFFER_LENGTH];
-	va_list ap;
-
-	va_start( ap, err );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, err, ap );
-	va_end( ap );
-
-	outFile( m_errorFile, buf );
+	OutFile( m_errorFile, err, "[ERR]" );
 }
 
 void oLog::outBasic(const char* str, ...)
@@ -127,14 +122,7 @@ void oLog::outBasic(const char* str, ...)
 		return;
 	}
 
-	char buf[BUFFER_LENGTH];
-	va_list ap;
-
-	va_start( ap, str );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, str, ap );
-	va_end( ap );
-
-	outFile( m_normalFile, buf );
+	OutFile( m_normalFile, str, "[BSC]" );
 }
 
 void oLog::outDetail(const char* str, ...)
@@ -144,14 +132,7 @@ void oLog::outDetail(const char* str, ...)
 		return;
 	}
 
-	char buf[BUFFER_LENGTH];
-	va_list ap;
-
-	va_start( ap, str );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, str, ap );
-	va_end( ap );
-
-	outFile( m_normalFile, buf );
+	OutFile( m_normalFile, str, "[DTL]" );
 }
 
 void oLog::outDebug(const char* str, ...)
@@ -161,14 +142,18 @@ void oLog::outDebug(const char* str, ...)
 		return;
 	}
 
-	char buf[BUFFER_LENGTH];
-	va_list ap;
+	OutFile( m_errorFile, str, "[DBG]" );
+}
 
-	va_start( ap, str );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, str, ap );
-	va_end( ap );
-
-	outFile( m_errorFile, buf );
+#define OutFile2(__outfile, __flag) {																\
+	char src[ BUFFER_LENGTH ];																				\
+	char message[ BUFFER_LENGTH ];																			\
+	_snprintf_s( src, sizeof(src), _TRUNCATE, "%s:%d %s\n", file, line, fncname );					\
+	va_list ap;																								\
+	va_start( ap, msg );																					\
+	vsnprintf_s( message, sizeof(message), _TRUNCATE, msg, ap );											\
+	va_end( ap );																							\
+	outFile( __outfile, __flag, message, src );																\
 }
 
 void oLog::logBasic(const char* file, int line, const char* fncname, const char* msg, ...)
@@ -178,17 +163,7 @@ void oLog::logBasic(const char* file, int line, const char* fncname, const char*
 		return;
 	}
 
-	char buf[ BUFFER_LENGTH ];
-	char message[ BUFFER_LENGTH ];
-
-	_snprintf_s( message, sizeof(message), _TRUNCATE, " [BSC] %s:%d %s\n%s", file, line, fncname, msg );
-	va_list ap;
-
-	va_start( ap, msg );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, message, ap );
-	va_end( ap );
-
-	outFile( m_normalFile, buf );
+	OutFile2( m_normalFile, "[BSC]" );
 }
 
 void oLog::logDetail(const char* file, int line, const char* fncname, const char* msg, ...)
@@ -198,17 +173,7 @@ void oLog::logDetail(const char* file, int line, const char* fncname, const char
 		return;
 	}
 
-	char buf[ BUFFER_LENGTH ];
-	char message[ BUFFER_LENGTH ];
-
-	_snprintf_s( message, sizeof(message), _TRUNCATE, " [DTL] %s:%d %s\n%s", file, line, fncname, msg );
-	va_list ap;
-
-	va_start( ap, msg );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, message, ap );
-	va_end( ap );
-
-	outFile( m_normalFile, buf );
+	OutFile2( m_normalFile, "[DTL]" );
 }
 
 void oLog::logError(const char* file, int line, const char* fncname, const char* msg, ...)
@@ -218,17 +183,7 @@ void oLog::logError(const char* file, int line, const char* fncname, const char*
 		return;
 	}
 
-	char buf[ BUFFER_LENGTH ];
-	char message[ BUFFER_LENGTH ];
-
-	_snprintf_s( message, sizeof(message), _TRUNCATE, " [ERR] %s:%d %s\n%s", file, line, fncname, msg );
-	va_list ap;
-
-	va_start( ap, msg );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, message, ap );
-	va_end( ap );
-
-	outFile( m_errorFile, buf );
+	OutFile2( m_errorFile, "[ERR]" );
 }
 
 void oLog::logDebug(const char* file, int line, const char* fncname, const char* msg, ...)
@@ -238,17 +193,7 @@ void oLog::logDebug(const char* file, int line, const char* fncname, const char*
 		return;
 	}
 
-	char buf[ BUFFER_LENGTH ];
-	char message[ BUFFER_LENGTH ];
-
-	_snprintf_s( message, sizeof(message), _TRUNCATE, " [DBG] %s:%d %s\n%s", file, line, fncname, msg );
-	va_list ap;
-
-	va_start( ap, msg );
-	vsnprintf_s( buf, sizeof(buf), _TRUNCATE, message, ap );
-	va_end( ap );
-
-	outFile( m_errorFile, buf );
+	OutFile2( m_errorFile, "[DBG]" );
 }
 
 void oLog::Init(int fileLogLevel, LogType logType)

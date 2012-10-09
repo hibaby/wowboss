@@ -66,7 +66,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	oLog::initialise();
 	sLog.Init( 5, LogType::LOGON_LOG );
 
-	LOG_DETAIL( "服务器启动...\n" );
+	LOG_DETAIL( "服务器启动..." );
 	CNet net;
 	if ( !net.Startup() )
 	{
@@ -81,7 +81,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	net.Connect( "127.0.0.1", 6000, &client );
 
-	printf( "%s\n", "welcome, the serve is started..." );
+	LOG_DETAIL( "%s", "welcome, the serve is started..." );
 
 	while( 1 )
 	{
@@ -93,7 +93,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	net.Clearup();
 
-	printf( "服务器退出...\n" );
+	LOG_DETAIL( "服务器退出..." );
 
 	sLog.Close();
 	oLog::release();

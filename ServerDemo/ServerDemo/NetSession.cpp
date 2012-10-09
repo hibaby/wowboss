@@ -1,6 +1,8 @@
 #include "NetSession.h"
 #include <cassert>
 
+#include "Log.h"
+
 #pragma comment( lib, "ws2_32.lib" ) 
 //////////////////////////////////////////////////////////////////////////
 #ifndef min  
@@ -143,6 +145,9 @@ bool CNetSession::PeekAMessage(wowboss::NetMessage& msg)
 //		cerr << "Failed to parse address book." << endl;       
 		return false;     
 	} 
+
+	LOG_DETAIL( "CNetSession::PeekAMessage %s", msg.DebugString().c_str() );
+
 	return true;
 }
 
@@ -170,6 +175,8 @@ bool CNetSession::Send(google::protobuf::Message* lpMessage)
 	{       
 		return false;
 	} 
+
+	LOG_DETAIL( "CNetSession::Send %s", lpMessage->DebugString().c_str() );
 
 	// 写入消息长度
 	int* pLenth = (int*)buffer;

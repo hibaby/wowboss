@@ -22,6 +22,7 @@ std::string FormatOutputString(const char* Prefix, const char* Description, bool
 class  oLog : public Singleton< oLog >
 {
 	public:
+
 		//log level 0
 		void outString(const char* str, ...);
 		void outError(const char* err, ...);
@@ -47,7 +48,7 @@ class  oLog : public Singleton< oLog >
 
 	private:
 		FILE* m_normalFile, *m_errorFile;
-		void outFile(FILE* file, char* msg, const char* source = NULL);
+		void outFile(FILE* file, const char* flag, const char* msg, const char* source = NULL);
 		void Time(char* buffer);
 };
 

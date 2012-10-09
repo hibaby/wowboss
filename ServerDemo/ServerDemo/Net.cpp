@@ -20,18 +20,17 @@ bool CNet::Startup()
 	
 	if ( err )
 	{
-		LOG_ERROR( "WSAStartup failed\n" );
+		LOG_ERROR( "WSAStartup failed[Err_%d]", WSAGetLastError() );
 	}
 	else
 	{
-		LOG_ERROR( "/************************************************\n"
+		LOG_DETAIL( "\nWSAStartup\n"
 			    "Version:       %d,%d\n"
 				"HighVersion:   %d,%d\n"
 				"MaxSockets:    %d\n"
 				"MaxUdpDg:      %d\n"
 				"Description:   %s\n"
-				"SystemStatus:  %s\n"
-				"/************************************************\n"
+				"SystemStatus:  %s"
 			, LOBYTE(wsaData.wVersion), HIBYTE(wsaData.wVersion)
 			, LOBYTE(wsaData.wHighVersion ), HIBYTE(wsaData.wHighVersion )
 			, wsaData.iMaxSockets
@@ -46,6 +45,7 @@ bool CNet::Startup()
 void CNet::Clearup()
 {
 	WSACleanup();
+	LOG_DETAIL( "WSACleanup" );
 }
 
 void CNet::Listen(u_short nPort, INetListener* lpListener)
@@ -54,8 +54,7 @@ void CNet::Listen(u_short nPort, INetListener* lpListener)
 	
 	if ( INVALID_SOCKET == s )
 	{
-		//log
-		WSAGetLastError();
+		LOG_ERROR( "Listen %u, failed[Err_%d]", nPort, WSAGetLastError() );
 		return;
 	}
 
@@ -66,13 +65,13 @@ void CNet::Listen(u_short nPort, INetListener* lpListener)
 
 	if ( SOCKET_ERROR == bind( s, (SOCKADDR*)&addrSrv, sizeof(SOCKADDR) ) )
 	{
-		//log
+		LOG_ERROR( "Listen %u, failed[Err_%d]", nPort, WSAGetLastError() );
 		return;
 	}
 
 	if ( SOCKET_ERROR == listen( s, 3 ) )
 	{
-		//log
+		LOG_ERROR( "Listen %u, failed[Err_%d]", nPort, WSAGetLastError() );
 		return;
 	}
 
@@ -80,7 +79,7 @@ void CNet::Listen(u_short nPort, INetListener* lpListener)
 	unsigned long mode = 1;
 	if ( SOCKET_ERROR == ioctlsocket( s, FIONBIO, &mode ) )
 	{
-		//log
+		LOG_ERROR( "Listen %u, failed[Err_%d]", nPort, WSAGetLastError() );
 		return;
 	}
 
@@ -90,7 +89,7 @@ void CNet::Listen(u_short nPort, INetListener* lpListener)
 	si.listener = lpListener;
 	m_Listen.push_back( si );
 
-	printf( "Listen port: %d\n", nPort );
+	LOG_DETAIL( "Listen port: %u", nPort );
 }
 
 void CNet::Connect(const char* lpszAddr, u_short nPort, INetListener* lpListener)
@@ -99,8 +98,7 @@ void CNet::Connect(const char* lpszAddr, u_short nPort, INetListener* lpListener
 
 	if ( INVALID_SOCKET == s )
 	{
-		//log
-		WSAGetLastError();
+		LOG_ERROR( "Connect %s:%u, failed[Err_%d]", lpszAddr, nPort, WSAGetLastError() );
 		return;
 	}
 
@@ -108,7 +106,7 @@ void CNet::Connect(const char* lpszAddr, u_short nPort, INetListener* lpListener
 	unsigned long mode = 1;
 	if ( SOCKET_ERROR == ioctlsocket( s, FIONBIO, &mode ) )
 	{
-		//log
+		LOG_ERROR( "Connect %s:%u, failed[Err_%d]", lpszAddr, nPort, WSAGetLastError() );
 		return;
 	}
 
@@ -121,9 +119,10 @@ void CNet::Connect(const char* lpszAddr, u_short nPort, INetListener* lpListener
 
 	if ( SOCKET_ERROR == connect( s, (sockaddr*)&addrSrv, sizeof(addrSrv) ) )
 	{
-		if ( WSAEWOULDBLOCK != ::WSAGetLastError() )
+		int lastError = ::WSAGetLastError();
+		if ( WSAEWOULDBLOCK != lastError )
 		{
-			//log
+			LOG_ERROR( "Connect %s:%u, failed[Err_%d]", lpszAddr, nPort, lastError );
 			return;
 		}
 	}
@@ -134,6 +133,7 @@ void CNet::Connect(const char* lpszAddr, u_short nPort, INetListener* lpListener
 	si.listener = lpListener;
 	m_Connect.push_back( si );
 
+	LOG_DETAIL( "Connect %s:%u", lpszAddr, nPort );
 }
 
 void CNet::Process()
@@ -153,29 +153,30 @@ void CNet::Process()
 		{
 			for(u_int i=0; i<fdSet.fd_count; i++)
 			{
+				int listenerIndex = index - fdSet.fd_count + i;
 				sockaddr_in addrRemote;
 				int nAddrLen = sizeof(addrRemote);
 				SOCKET sNew = ::accept(fdSet.fd_array[i], (SOCKADDR*)&addrRemote, &nAddrLen);
 				if ( SOCKET_ERROR == sNew )
 				{
-					// log
+					LOG_ERROR( "accept failed[Port_%u][Err_%d]", m_Listen[listenerIndex].port, WSAGetLastError() );
+					continue;
 				}
 				//非阻塞方式
 				unsigned long mode = 1;
 				if ( SOCKET_ERROR == ioctlsocket( sNew, FIONBIO, &mode ) )
 				{
-					// log
+					LOG_ERROR( "accept failed[Port_%u][Err_%d]", m_Listen[listenerIndex].port, WSAGetLastError() );
+					continue;
 				}
 
 				CNetSession* pStream = new CNetSession(sNew);
 				m_NetSessions.push_back( pStream );
 
-				int listenerIndex = index - fdSet.fd_count + i;
 				INetListener* pListener = m_Listen[listenerIndex].listener;
 				pListener->OnAccept( pStream );
 
-//				FD_SET(sNew, &fdSocket);
-				printf("接收到连接（%s）\n", ::inet_ntoa(addrRemote.sin_addr));
+				LOG_DETAIL( "监听端口[%u] 接收到连接来自（%s）", m_Listen[listenerIndex].port, ::inet_ntoa(addrRemote.sin_addr) );
 			}
 		}
 	}
@@ -195,6 +196,9 @@ void CNet::Process()
 				int listenerIndex = index - fdSet.fd_count + i;
 				INetListener* pListener = m_Connect[listenerIndex].listener;
 				pListener->OnConnect( pStream );
+
+				LOG_DETAIL( "端口[%u] 连接成功", m_Connect[listenerIndex].port );
+
 				Remove( fdSet.fd_array[i], m_Connect );
 			}
 		}
@@ -219,12 +223,14 @@ void CNet::Process()
 					int recvSize = recv( fdSet.fd_array[i], buffer, bufferSize, 0 );
 					if ( SOCKET_ERROR == recvSize )
 					{
-						// log
+						LOG_ERROR( "recv failed[Err_%d]", WSAGetLastError() );
+						break;
 					}
 					else if ( 0 == recvSize )
 					{
 						// 如果recv函数在等待协议接收数据时网络中断了，那么它返回0。
-
+						LOG_ERROR( "recv failed[Err_%d]", WSAGetLastError() );
+						break;
 					}
 					pStream->EndRecv(recvSize);
 
@@ -233,9 +239,6 @@ void CNet::Process()
 						break;
 					}
 				}
-				// 检查当前MessageChunk是否为空，空获取一个新MessageChunk
-				// 使用Chunk从sock中读取一个MessageBlock大小的数据
-				// 检查是否
 			}
 		}
 	}
@@ -264,11 +267,12 @@ void CNet::Process()
 
 					if ( SOCKET_ERROR == sendSize )
 					{
-						// log
+						sendSize = 0;
+						LOG_ERROR( "send failed[Err_%d]", WSAGetLastError() );
 					}
 					else if ( 0 == sendSize )
 					{
-						// 
+						LOG_ERROR( "send failed[Err_%d]", WSAGetLastError() );
 
 					}
 
