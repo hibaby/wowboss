@@ -55,12 +55,12 @@ public:
 	}
 
 	bool PushAMessage(){
-		unsigned int l = *(unsigned int*)(m_buffer+m_posPush);
+		int l = *(int*)(m_buffer+m_posPush);
 		return Push( l );
 	}
 
 	bool PopAMessage(){
-		unsigned int l = *(unsigned int*)(m_buffer+m_posPop);
+		int l = *(int*)(m_buffer+m_posPop);
 		return Pop( l );
 	}
 
@@ -69,7 +69,7 @@ public:
 		{
 			return false;
 		}
-		unsigned int l = *(unsigned int*)(m_buffer+m_posPop);
+		int l = *(int*)(m_buffer+m_posPop);
 		if ( (m_posPop + l) > m_posPush )
 		{
 			return false;

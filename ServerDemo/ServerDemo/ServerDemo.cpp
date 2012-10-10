@@ -64,7 +64,7 @@ void testNetMessage()
 int _tmain(int argc, _TCHAR* argv[])
 {
 	oLog::initialise();
-	sLog.Init( 5, LogType::LOGON_LOG );
+	sLog.Init( 5, LOGON_LOG );
 
 	LOG_DETAIL( "·þÎñÆ÷Æô¶¯..." );
 	CNet net;
