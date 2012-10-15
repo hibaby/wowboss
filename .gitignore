@@ -11,6 +11,10 @@ ServerDemo/testProtobuf/Release
 
 ServerDemo/ipch
 
+wowboss/wowboss_Data
+wowboss/*.apk
+wowboss/*.exe
+
 # ºöÂÔvs2010ÎÄ¼þ
 *.sdf
 *.suo
