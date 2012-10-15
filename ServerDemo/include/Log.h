@@ -1,13 +1,10 @@
-#ifndef WOWSERVER_LOG_H
-#define WOWSERVER_LOG_H
+#pragma once
 
 #include "Singleton.h"
 
 #include <string>
 #include <time.h>
 
-#define SZLTR "\xe5\xcf\xfe\xed\xf3\xfb\x03\xeb"
-#define SZLTR_LENGTH 9
 #define TIME_FORMAT "[%H:%M]"
 #define TIME_FORMAT_LENGTH 8
 
@@ -52,37 +49,11 @@ class  oLog : public Singleton< oLog >
 		FILE* m_normalFile, *m_errorFile;
 		void outFile(FILE* file, char* msg, const char* source = NULL);
 		void Time(char* buffer);
-		inline char dcd(char in)
-		{
-			char out = in;
-			out -= 13;
-			out ^= 131;
-			return out;
-		}
-
-		void dcds(char* str)
-		{
-			unsigned long i = 0;
-			size_t len = strlen(str);
-
-			for(i = 0; i < len; ++i)
-				str[i] = dcd(str[i]);
-
-		}
-
-		void pdcds(const char* str, char* buf)
-		{
-			strcpy(buf, str);
-			dcds(buf);
-		}
 };
 
 #define sLog oLog::getSingleton()
 
-#define LOG_BASIC( msg, ... ) sLog.logBasic( __FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__ )
+#define LOG_BASIC( msg, ... )  sLog.logBasic ( __FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__ )
 #define LOG_DETAIL( msg, ... ) sLog.logDetail( __FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__ )
-#define LOG_ERROR( msg, ... ) sLog.logError( __FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__ )
-#define LOG_DEBUG( msg, ... ) sLog.logDebug( __FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__ )
-
-
-#endif
+#define LOG_ERROR( msg, ... )  sLog.logError ( __FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__ )
+#define LOG_DEBUG( msg, ... )  sLog.logDebug ( __FILE__, __LINE__, __FUNCTION__, msg, ##__VA_ARGS__ )

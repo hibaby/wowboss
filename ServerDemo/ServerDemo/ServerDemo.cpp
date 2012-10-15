@@ -95,6 +95,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	printf( "·şÎñÆ÷ÍË³ö...\n" );
 
+	sLog.Close();
 	oLog::release();
 	return 0;
 }
