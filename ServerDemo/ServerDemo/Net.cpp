@@ -197,7 +197,16 @@ void CNet::Process()
 				INetListener* pListener = m_Connect[listenerIndex].listener;
 				pListener->OnConnect( pStream );
 
-				LOG_DETAIL( "端口[%u] 连接成功", m_Connect[listenerIndex].port );
+				struct sockaddr_in addrRemote;
+				int len = sizeof(addrRemote);
+				if( SOCKET_ERROR ==  getpeername( m_Connect[listenerIndex].sock, (struct sockaddr *)&addrRemote, &len))
+				{
+					LOG_ERROR( "端口[%u] 连接成功时发现异常[Err_%d]", m_Connect[listenerIndex].port, WSAGetLastError() );
+				}
+				else
+				{
+					LOG_DETAIL( "连接[%s:%u]成功", ::inet_ntoa(addrRemote.sin_addr), m_Connect[listenerIndex].port );
+				}
 
 				Remove( fdSet.fd_array[i], m_Connect );
 			}
