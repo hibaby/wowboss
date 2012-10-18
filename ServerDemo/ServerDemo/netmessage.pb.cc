@@ -17,9 +17,12 @@ namespace wowboss {
 
 namespace {
 
-const ::google::protobuf::Descriptor* NMHello_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* NMHello_SYN_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  NMHello_reflection_ = NULL;
+  NMHello_SYN_reflection_ = NULL;
+const ::google::protobuf::Descriptor* NMHello_ACK_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  NMHello_ACK_reflection_ = NULL;
 const ::google::protobuf::Descriptor* NetMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   NetMessage_reflection_ = NULL;
@@ -34,25 +37,45 @@ void protobuf_AssignDesc_netmessage_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "netmessage.proto");
   GOOGLE_CHECK(file != NULL);
-  NMHello_descriptor_ = file->message_type(0);
-  static const int NMHello_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello, version_),
+  NMHello_SYN_descriptor_ = file->message_type(0);
+  static const int NMHello_SYN_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_SYN, version_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_SYN, username_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_SYN, password_),
   };
-  NMHello_reflection_ =
+  NMHello_SYN_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      NMHello_descriptor_,
-      NMHello::default_instance_,
-      NMHello_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello, _unknown_fields_),
+      NMHello_SYN_descriptor_,
+      NMHello_SYN::default_instance_,
+      NMHello_SYN_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_SYN, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_SYN, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(NMHello));
-  NetMessage_descriptor_ = file->message_type(1);
-  static const int NetMessage_offsets_[2] = {
+      sizeof(NMHello_SYN));
+  NMHello_ACK_descriptor_ = file->message_type(1);
+  static const int NMHello_ACK_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_ACK, version_ok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_ACK, username_ok_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_ACK, password_ok_),
+  };
+  NMHello_ACK_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      NMHello_ACK_descriptor_,
+      NMHello_ACK::default_instance_,
+      NMHello_ACK_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_ACK, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NMHello_ACK, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(NMHello_ACK));
+  NetMessage_descriptor_ = file->message_type(2);
+  static const int NetMessage_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetMessage, id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetMessage, hello_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetMessage, hello_syn_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(NetMessage, hello_ack_),
   };
   NetMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -79,7 +102,9 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    NMHello_descriptor_, &NMHello::default_instance());
+    NMHello_SYN_descriptor_, &NMHello_SYN::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    NMHello_ACK_descriptor_, &NMHello_ACK::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     NetMessage_descriptor_, &NetMessage::default_instance());
 }
@@ -87,8 +112,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_netmessage_2eproto() {
-  delete NMHello::default_instance_;
-  delete NMHello_reflection_;
+  delete NMHello_SYN::default_instance_;
+  delete NMHello_SYN_reflection_;
+  delete NMHello_ACK::default_instance_;
+  delete NMHello_ACK_reflection_;
   delete NetMessage::default_instance_;
   delete NetMessage_reflection_;
 }
@@ -100,16 +127,22 @@ void protobuf_AddDesc_netmessage_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\020netmessage.proto\022\007wowboss\"\032\n\007NMHello\022\017"
-    "\n\007version\030\001 \002(\005\"t\n\nNetMessage\022+\n\002id\030\001 \002("
-    "\0162\037.wowboss.NetMessage.MessageType\022\037\n\005he"
-    "llo\030\002 \001(\0132\020.wowboss.NMHello\"\030\n\013MessageTy"
-    "pe\022\t\n\005HELLO\020\000", 173);
+    "\n\020netmessage.proto\022\007wowboss\"B\n\013NMHello_S"
+    "YN\022\017\n\007version\030\001 \002(\005\022\020\n\010username\030\002 \002(\t\022\020\n"
+    "\010password\030\003 \002(\t\"K\n\013NMHello_ACK\022\022\n\nversio"
+    "n_ok\030\001 \002(\010\022\023\n\013username_ok\030\002 \002(\010\022\023\n\013passw"
+    "ord_ok\030\003 \002(\010\"\270\001\n\nNetMessage\022+\n\002id\030\001 \002(\0162"
+    "\037.wowboss.NetMessage.MessageType\022\'\n\thell"
+    "o_syn\030\002 \001(\0132\024.wowboss.NMHello_SYN\022\'\n\thel"
+    "lo_ack\030\003 \001(\0132\024.wowboss.NMHello_ACK\"+\n\013Me"
+    "ssageType\022\r\n\tHELLO_SYN\020\000\022\r\n\tHELLO_ACK\020\001", 359);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "netmessage.proto", &protobuf_RegisterTypes);
-  NMHello::default_instance_ = new NMHello();
+  NMHello_SYN::default_instance_ = new NMHello_SYN();
+  NMHello_ACK::default_instance_ = new NMHello_ACK();
   NetMessage::default_instance_ = new NetMessage();
-  NMHello::default_instance_->InitAsDefaultInstance();
+  NMHello_SYN::default_instance_->InitAsDefaultInstance();
+  NMHello_ACK::default_instance_->InitAsDefaultInstance();
   NetMessage::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_netmessage_2eproto);
 }
@@ -125,67 +158,87 @@ struct StaticDescriptorInitializer_netmessage_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int NMHello::kVersionFieldNumber;
+const int NMHello_SYN::kVersionFieldNumber;
+const int NMHello_SYN::kUsernameFieldNumber;
+const int NMHello_SYN::kPasswordFieldNumber;
 #endif  // !_MSC_VER
 
-NMHello::NMHello()
+NMHello_SYN::NMHello_SYN()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void NMHello::InitAsDefaultInstance() {
+void NMHello_SYN::InitAsDefaultInstance() {
 }
 
-NMHello::NMHello(const NMHello& from)
+NMHello_SYN::NMHello_SYN(const NMHello_SYN& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void NMHello::SharedCtor() {
+void NMHello_SYN::SharedCtor() {
   _cached_size_ = 0;
   version_ = 0;
+  username_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-NMHello::~NMHello() {
+NMHello_SYN::~NMHello_SYN() {
   SharedDtor();
 }
 
-void NMHello::SharedDtor() {
+void NMHello_SYN::SharedDtor() {
+  if (username_ != &::google::protobuf::internal::kEmptyString) {
+    delete username_;
+  }
+  if (password_ != &::google::protobuf::internal::kEmptyString) {
+    delete password_;
+  }
   if (this != default_instance_) {
   }
 }
 
-void NMHello::SetCachedSize(int size) const {
+void NMHello_SYN::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* NMHello::descriptor() {
+const ::google::protobuf::Descriptor* NMHello_SYN::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return NMHello_descriptor_;
+  return NMHello_SYN_descriptor_;
 }
 
-const NMHello& NMHello::default_instance() {
+const NMHello_SYN& NMHello_SYN::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();  return *default_instance_;
 }
 
-NMHello* NMHello::default_instance_ = NULL;
+NMHello_SYN* NMHello_SYN::default_instance_ = NULL;
 
-NMHello* NMHello::New() const {
-  return new NMHello;
+NMHello_SYN* NMHello_SYN::New() const {
+  return new NMHello_SYN;
 }
 
-void NMHello::Clear() {
+void NMHello_SYN::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     version_ = 0;
+    if (has_username()) {
+      if (username_ != &::google::protobuf::internal::kEmptyString) {
+        username_->clear();
+      }
+    }
+    if (has_password()) {
+      if (password_ != &::google::protobuf::internal::kEmptyString) {
+        password_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool NMHello::MergePartialFromCodedStream(
+bool NMHello_SYN::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -199,6 +252,40 @@ bool NMHello::MergePartialFromCodedStream(
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &version_)));
           set_has_version();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_username;
+        break;
+      }
+      
+      // required string username = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_username:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_username()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->username().data(), this->username().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_password;
+        break;
+      }
+      
+      // required string password = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_password:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_password()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->password().data(), this->password().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -222,11 +309,29 @@ bool NMHello::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void NMHello::SerializeWithCachedSizes(
+void NMHello_SYN::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required int32 version = 1;
   if (has_version()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->version(), output);
+  }
+  
+  // required string username = 2;
+  if (has_username()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->username().data(), this->username().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->username(), output);
+  }
+  
+  // required string password = 3;
+  if (has_password()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->password().data(), this->password().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->password(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -235,11 +340,31 @@ void NMHello::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* NMHello::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* NMHello_SYN::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required int32 version = 1;
   if (has_version()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->version(), target);
+  }
+  
+  // required string username = 2;
+  if (has_username()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->username().data(), this->username().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->username(), target);
+  }
+  
+  // required string password = 3;
+  if (has_password()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->password().data(), this->password().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->password(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -249,7 +374,7 @@ void NMHello::SerializeWithCachedSizes(
   return target;
 }
 
-int NMHello::ByteSize() const {
+int NMHello_SYN::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -258,6 +383,20 @@ int NMHello::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->version());
+    }
+    
+    // required string username = 2;
+    if (has_username()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->username());
+    }
+    
+    // required string password = 3;
+    if (has_password()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->password());
     }
     
   }
@@ -272,10 +411,10 @@ int NMHello::ByteSize() const {
   return total_size;
 }
 
-void NMHello::MergeFrom(const ::google::protobuf::Message& from) {
+void NMHello_SYN::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const NMHello* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const NMHello*>(
+  const NMHello_SYN* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const NMHello_SYN*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -284,48 +423,338 @@ void NMHello::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void NMHello::MergeFrom(const NMHello& from) {
+void NMHello_SYN::MergeFrom(const NMHello_SYN& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_version()) {
       set_version(from.version());
     }
+    if (from.has_username()) {
+      set_username(from.username());
+    }
+    if (from.has_password()) {
+      set_password(from.password());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void NMHello::CopyFrom(const ::google::protobuf::Message& from) {
+void NMHello_SYN::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void NMHello::CopyFrom(const NMHello& from) {
+void NMHello_SYN::CopyFrom(const NMHello_SYN& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool NMHello::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+bool NMHello_SYN::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
   
   return true;
 }
 
-void NMHello::Swap(NMHello* other) {
+void NMHello_SYN::Swap(NMHello_SYN* other) {
   if (other != this) {
     std::swap(version_, other->version_);
+    std::swap(username_, other->username_);
+    std::swap(password_, other->password_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata NMHello::GetMetadata() const {
+::google::protobuf::Metadata NMHello_SYN::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = NMHello_descriptor_;
-  metadata.reflection = NMHello_reflection_;
+  metadata.descriptor = NMHello_SYN_descriptor_;
+  metadata.reflection = NMHello_SYN_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int NMHello_ACK::kVersionOkFieldNumber;
+const int NMHello_ACK::kUsernameOkFieldNumber;
+const int NMHello_ACK::kPasswordOkFieldNumber;
+#endif  // !_MSC_VER
+
+NMHello_ACK::NMHello_ACK()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void NMHello_ACK::InitAsDefaultInstance() {
+}
+
+NMHello_ACK::NMHello_ACK(const NMHello_ACK& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void NMHello_ACK::SharedCtor() {
+  _cached_size_ = 0;
+  version_ok_ = false;
+  username_ok_ = false;
+  password_ok_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+NMHello_ACK::~NMHello_ACK() {
+  SharedDtor();
+}
+
+void NMHello_ACK::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void NMHello_ACK::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* NMHello_ACK::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return NMHello_ACK_descriptor_;
+}
+
+const NMHello_ACK& NMHello_ACK::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_netmessage_2eproto();  return *default_instance_;
+}
+
+NMHello_ACK* NMHello_ACK::default_instance_ = NULL;
+
+NMHello_ACK* NMHello_ACK::New() const {
+  return new NMHello_ACK;
+}
+
+void NMHello_ACK::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    version_ok_ = false;
+    username_ok_ = false;
+    password_ok_ = false;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool NMHello_ACK::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bool version_ok = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &version_ok_)));
+          set_has_version_ok();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_username_ok;
+        break;
+      }
+      
+      // required bool username_ok = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_username_ok:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &username_ok_)));
+          set_has_username_ok();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_password_ok;
+        break;
+      }
+      
+      // required bool password_ok = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_password_ok:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &password_ok_)));
+          set_has_password_ok();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+      
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void NMHello_ACK::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required bool version_ok = 1;
+  if (has_version_ok()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->version_ok(), output);
+  }
+  
+  // required bool username_ok = 2;
+  if (has_username_ok()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->username_ok(), output);
+  }
+  
+  // required bool password_ok = 3;
+  if (has_password_ok()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->password_ok(), output);
+  }
+  
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* NMHello_ACK::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required bool version_ok = 1;
+  if (has_version_ok()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->version_ok(), target);
+  }
+  
+  // required bool username_ok = 2;
+  if (has_username_ok()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->username_ok(), target);
+  }
+  
+  // required bool password_ok = 3;
+  if (has_password_ok()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->password_ok(), target);
+  }
+  
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int NMHello_ACK::ByteSize() const {
+  int total_size = 0;
+  
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bool version_ok = 1;
+    if (has_version_ok()) {
+      total_size += 1 + 1;
+    }
+    
+    // required bool username_ok = 2;
+    if (has_username_ok()) {
+      total_size += 1 + 1;
+    }
+    
+    // required bool password_ok = 3;
+    if (has_password_ok()) {
+      total_size += 1 + 1;
+    }
+    
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void NMHello_ACK::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const NMHello_ACK* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const NMHello_ACK*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void NMHello_ACK::MergeFrom(const NMHello_ACK& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_version_ok()) {
+      set_version_ok(from.version_ok());
+    }
+    if (from.has_username_ok()) {
+      set_username_ok(from.username_ok());
+    }
+    if (from.has_password_ok()) {
+      set_password_ok(from.password_ok());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void NMHello_ACK::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void NMHello_ACK::CopyFrom(const NMHello_ACK& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool NMHello_ACK::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  
+  return true;
+}
+
+void NMHello_ACK::Swap(NMHello_ACK* other) {
+  if (other != this) {
+    std::swap(version_ok_, other->version_ok_);
+    std::swap(username_ok_, other->username_ok_);
+    std::swap(password_ok_, other->password_ok_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata NMHello_ACK::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = NMHello_ACK_descriptor_;
+  metadata.reflection = NMHello_ACK_reflection_;
   return metadata;
 }
 
@@ -339,6 +768,7 @@ const ::google::protobuf::EnumDescriptor* NetMessage_MessageType_descriptor() {
 bool NetMessage_MessageType_IsValid(int value) {
   switch(value) {
     case 0:
+    case 1:
       return true;
     default:
       return false;
@@ -346,14 +776,16 @@ bool NetMessage_MessageType_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const NetMessage_MessageType NetMessage::HELLO;
+const NetMessage_MessageType NetMessage::HELLO_SYN;
+const NetMessage_MessageType NetMessage::HELLO_ACK;
 const NetMessage_MessageType NetMessage::MessageType_MIN;
 const NetMessage_MessageType NetMessage::MessageType_MAX;
 const int NetMessage::MessageType_ARRAYSIZE;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
 const int NetMessage::kIdFieldNumber;
-const int NetMessage::kHelloFieldNumber;
+const int NetMessage::kHelloSynFieldNumber;
+const int NetMessage::kHelloAckFieldNumber;
 #endif  // !_MSC_VER
 
 NetMessage::NetMessage()
@@ -362,7 +794,8 @@ NetMessage::NetMessage()
 }
 
 void NetMessage::InitAsDefaultInstance() {
-  hello_ = const_cast< ::wowboss::NMHello*>(&::wowboss::NMHello::default_instance());
+  hello_syn_ = const_cast< ::wowboss::NMHello_SYN*>(&::wowboss::NMHello_SYN::default_instance());
+  hello_ack_ = const_cast< ::wowboss::NMHello_ACK*>(&::wowboss::NMHello_ACK::default_instance());
 }
 
 NetMessage::NetMessage(const NetMessage& from)
@@ -374,7 +807,8 @@ NetMessage::NetMessage(const NetMessage& from)
 void NetMessage::SharedCtor() {
   _cached_size_ = 0;
   id_ = 0;
-  hello_ = NULL;
+  hello_syn_ = NULL;
+  hello_ack_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -384,7 +818,8 @@ NetMessage::~NetMessage() {
 
 void NetMessage::SharedDtor() {
   if (this != default_instance_) {
-    delete hello_;
+    delete hello_syn_;
+    delete hello_ack_;
   }
 }
 
@@ -411,8 +846,11 @@ NetMessage* NetMessage::New() const {
 void NetMessage::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     id_ = 0;
-    if (has_hello()) {
-      if (hello_ != NULL) hello_->::wowboss::NMHello::Clear();
+    if (has_hello_syn()) {
+      if (hello_syn_ != NULL) hello_syn_->::wowboss::NMHello_SYN::Clear();
+    }
+    if (has_hello_ack()) {
+      if (hello_ack_ != NULL) hello_ack_->::wowboss::NMHello_ACK::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -441,17 +879,31 @@ bool NetMessage::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_hello;
+        if (input->ExpectTag(18)) goto parse_hello_syn;
         break;
       }
       
-      // optional .wowboss.NMHello hello = 2;
+      // optional .wowboss.NMHello_SYN hello_syn = 2;
       case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_hello:
+         parse_hello_syn:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_hello()));
+               input, mutable_hello_syn()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_hello_ack;
+        break;
+      }
+      
+      // optional .wowboss.NMHello_ACK hello_ack = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_hello_ack:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_hello_ack()));
         } else {
           goto handle_uninterpreted;
         }
@@ -483,10 +935,16 @@ void NetMessage::SerializeWithCachedSizes(
       1, this->id(), output);
   }
   
-  // optional .wowboss.NMHello hello = 2;
-  if (has_hello()) {
+  // optional .wowboss.NMHello_SYN hello_syn = 2;
+  if (has_hello_syn()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->hello(), output);
+      2, this->hello_syn(), output);
+  }
+  
+  // optional .wowboss.NMHello_ACK hello_ack = 3;
+  if (has_hello_ack()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->hello_ack(), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -503,11 +961,18 @@ void NetMessage::SerializeWithCachedSizes(
       1, this->id(), target);
   }
   
-  // optional .wowboss.NMHello hello = 2;
-  if (has_hello()) {
+  // optional .wowboss.NMHello_SYN hello_syn = 2;
+  if (has_hello_syn()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        2, this->hello(), target);
+        2, this->hello_syn(), target);
+  }
+  
+  // optional .wowboss.NMHello_ACK hello_ack = 3;
+  if (has_hello_ack()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->hello_ack(), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -527,11 +992,18 @@ int NetMessage::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->id());
     }
     
-    // optional .wowboss.NMHello hello = 2;
-    if (has_hello()) {
+    // optional .wowboss.NMHello_SYN hello_syn = 2;
+    if (has_hello_syn()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->hello());
+          this->hello_syn());
+    }
+    
+    // optional .wowboss.NMHello_ACK hello_ack = 3;
+    if (has_hello_ack()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->hello_ack());
     }
     
   }
@@ -564,8 +1036,11 @@ void NetMessage::MergeFrom(const NetMessage& from) {
     if (from.has_id()) {
       set_id(from.id());
     }
-    if (from.has_hello()) {
-      mutable_hello()->::wowboss::NMHello::MergeFrom(from.hello());
+    if (from.has_hello_syn()) {
+      mutable_hello_syn()->::wowboss::NMHello_SYN::MergeFrom(from.hello_syn());
+    }
+    if (from.has_hello_ack()) {
+      mutable_hello_ack()->::wowboss::NMHello_ACK::MergeFrom(from.hello_ack());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -586,8 +1061,11 @@ void NetMessage::CopyFrom(const NetMessage& from) {
 bool NetMessage::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   
-  if (has_hello()) {
-    if (!this->hello().IsInitialized()) return false;
+  if (has_hello_syn()) {
+    if (!this->hello_syn().IsInitialized()) return false;
+  }
+  if (has_hello_ack()) {
+    if (!this->hello_ack().IsInitialized()) return false;
   }
   return true;
 }
@@ -595,7 +1073,8 @@ bool NetMessage::IsInitialized() const {
 void NetMessage::Swap(NetMessage* other) {
   if (other != this) {
     std::swap(id_, other->id_);
-    std::swap(hello_, other->hello_);
+    std::swap(hello_syn_, other->hello_syn_);
+    std::swap(hello_ack_, other->hello_ack_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

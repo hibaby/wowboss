@@ -1,14 +1,24 @@
 package wowboss;
 
-message NMHello {
+message NMHello_SYN {
   required int32 version = 1;
+  required string username = 2;
+  required string password = 3;
+}
+
+message NMHello_ACK {
+  required bool version_ok = 1;
+  required bool username_ok = 2;
+  required bool password_ok = 3;
 }
 
 message NetMessage {
   enum MessageType {
-    HELLO = 0;
+    HELLO_SYN = 0;
+    HELLO_ACK = 1;
   }
 
   required MessageType id = 1;
-  optional NMHello hello = 2;
+  optional NMHello_SYN hello_syn = 2;
+  optional NMHello_ACK hello_ack = 3;
 }

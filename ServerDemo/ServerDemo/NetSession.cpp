@@ -58,7 +58,10 @@ bool CNetSession::PeekAMessage(wowboss::NetMessage& msg)
 		return false;     
 	} 
 
-	LOG_DETAIL( "CNetSession::PeekAMessage %s", msg.DebugString().c_str() );
+	LOG_DETAIL( "CNetSession::PeekAMessage ===========\n"
+		        "%s"
+		        "====================================="
+		        , msg.DebugString().c_str() );
 
 	return true;
 }
@@ -88,7 +91,10 @@ bool CNetSession::Send(google::protobuf::Message* lpMessage)
 		return false;
 	} 
 
-	LOG_DETAIL( "CNetSession::Send %s", lpMessage->DebugString().c_str() );
+	LOG_DETAIL( "CNetSession::Send ===================\n"
+		        "%s"
+				"====================================="
+				, lpMessage->DebugString().c_str() );
 
 	// 写入消息长度
 	int* pLenth = (int*)buffer;

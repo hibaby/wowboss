@@ -18,8 +18,10 @@ namespace wowboss {
     }
     #endregion
     #region Static variables
-    internal static pbd::MessageDescriptor internal__static_wowboss_NMHello__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::wowboss.NMHello, global::wowboss.NMHello.Builder> internal__static_wowboss_NMHello__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_wowboss_NMHello_SYN__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::wowboss.NMHello_SYN, global::wowboss.NMHello_SYN.Builder> internal__static_wowboss_NMHello_SYN__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_wowboss_NMHello_ACK__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::wowboss.NMHello_ACK, global::wowboss.NMHello_ACK.Builder> internal__static_wowboss_NMHello_ACK__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_wowboss_NetMessage__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::wowboss.NetMessage, global::wowboss.NetMessage.Builder> internal__static_wowboss_NetMessage__FieldAccessorTable;
     #endregion
@@ -31,20 +33,28 @@ namespace wowboss {
     
     static Netmessage() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
-          "ChBuZXRtZXNzYWdlLnByb3RvEgd3b3dib3NzIhoKB05NSGVsbG8SDwoHdmVy" + 
-          "c2lvbhgBIAIoBSJ0CgpOZXRNZXNzYWdlEisKAmlkGAEgAigOMh8ud293Ym9z" + 
-          "cy5OZXRNZXNzYWdlLk1lc3NhZ2VUeXBlEh8KBWhlbGxvGAIgASgLMhAud293" + 
-          "Ym9zcy5OTUhlbGxvIhgKC01lc3NhZ2VUeXBlEgkKBUhFTExPEAA=");
+          "ChBuZXRtZXNzYWdlLnByb3RvEgd3b3dib3NzIkIKC05NSGVsbG9fU1lOEg8K" + 
+          "B3ZlcnNpb24YASACKAUSEAoIdXNlcm5hbWUYAiACKAkSEAoIcGFzc3dvcmQY" + 
+          "AyACKAkiSwoLTk1IZWxsb19BQ0sSEgoKdmVyc2lvbl9vaxgBIAIoCBITCgt1" + 
+          "c2VybmFtZV9vaxgCIAIoCBITCgtwYXNzd29yZF9vaxgDIAIoCCK4AQoKTmV0" + 
+          "TWVzc2FnZRIrCgJpZBgBIAIoDjIfLndvd2Jvc3MuTmV0TWVzc2FnZS5NZXNz" + 
+          "YWdlVHlwZRInCgloZWxsb19zeW4YAiABKAsyFC53b3dib3NzLk5NSGVsbG9f" + 
+          "U1lOEicKCWhlbGxvX2FjaxgDIAEoCzIULndvd2Jvc3MuTk1IZWxsb19BQ0si" + 
+          "KwoLTWVzc2FnZVR5cGUSDQoJSEVMTE9fU1lOEAASDQoJSEVMTE9fQUNLEAE=");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
-        internal__static_wowboss_NMHello__Descriptor = Descriptor.MessageTypes[0];
-        internal__static_wowboss_NMHello__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::wowboss.NMHello, global::wowboss.NMHello.Builder>(internal__static_wowboss_NMHello__Descriptor,
-                new string[] { "Version", });
-        internal__static_wowboss_NetMessage__Descriptor = Descriptor.MessageTypes[1];
+        internal__static_wowboss_NMHello_SYN__Descriptor = Descriptor.MessageTypes[0];
+        internal__static_wowboss_NMHello_SYN__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::wowboss.NMHello_SYN, global::wowboss.NMHello_SYN.Builder>(internal__static_wowboss_NMHello_SYN__Descriptor,
+                new string[] { "Version", "Username", "Password", });
+        internal__static_wowboss_NMHello_ACK__Descriptor = Descriptor.MessageTypes[1];
+        internal__static_wowboss_NMHello_ACK__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::wowboss.NMHello_ACK, global::wowboss.NMHello_ACK.Builder>(internal__static_wowboss_NMHello_ACK__Descriptor,
+                new string[] { "VersionOk", "UsernameOk", "PasswordOk", });
+        internal__static_wowboss_NetMessage__Descriptor = Descriptor.MessageTypes[2];
         internal__static_wowboss_NetMessage__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::wowboss.NetMessage, global::wowboss.NetMessage.Builder>(internal__static_wowboss_NetMessage__Descriptor,
-                new string[] { "Id", "Hello", });
+                new string[] { "Id", "HelloSyn", "HelloAck", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -58,29 +68,29 @@ namespace wowboss {
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
   [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ProtoGen", "2.4.1.473")]
-  public sealed partial class NMHello : pb::GeneratedMessage<NMHello, NMHello.Builder> {
-    private NMHello() { }
-    private static readonly NMHello defaultInstance = new NMHello().MakeReadOnly();
-    private static readonly string[] _nMHelloFieldNames = new string[] { "version" };
-    private static readonly uint[] _nMHelloFieldTags = new uint[] { 8 };
-    public static NMHello DefaultInstance {
+  public sealed partial class NMHello_SYN : pb::GeneratedMessage<NMHello_SYN, NMHello_SYN.Builder> {
+    private NMHello_SYN() { }
+    private static readonly NMHello_SYN defaultInstance = new NMHello_SYN().MakeReadOnly();
+    private static readonly string[] _nMHelloSYNFieldNames = new string[] { "password", "username", "version" };
+    private static readonly uint[] _nMHelloSYNFieldTags = new uint[] { 26, 18, 8 };
+    public static NMHello_SYN DefaultInstance {
       get { return defaultInstance; }
     }
     
-    public override NMHello DefaultInstanceForType {
+    public override NMHello_SYN DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override NMHello ThisMessage {
+    protected override NMHello_SYN ThisMessage {
       get { return this; }
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::wowboss.Netmessage.internal__static_wowboss_NMHello__Descriptor; }
+      get { return global::wowboss.Netmessage.internal__static_wowboss_NMHello_SYN__Descriptor; }
     }
     
-    protected override pb::FieldAccess.FieldAccessorTable<NMHello, NMHello.Builder> InternalFieldAccessors {
-      get { return global::wowboss.Netmessage.internal__static_wowboss_NMHello__FieldAccessorTable; }
+    protected override pb::FieldAccess.FieldAccessorTable<NMHello_SYN, NMHello_SYN.Builder> InternalFieldAccessors {
+      get { return global::wowboss.Netmessage.internal__static_wowboss_NMHello_SYN__FieldAccessorTable; }
     }
     
     public const int VersionFieldNumber = 1;
@@ -93,18 +103,46 @@ namespace wowboss {
       get { return version_; }
     }
     
+    public const int UsernameFieldNumber = 2;
+    private bool hasUsername;
+    private string username_ = "";
+    public bool HasUsername {
+      get { return hasUsername; }
+    }
+    public string Username {
+      get { return username_; }
+    }
+    
+    public const int PasswordFieldNumber = 3;
+    private bool hasPassword;
+    private string password_ = "";
+    public bool HasPassword {
+      get { return hasPassword; }
+    }
+    public string Password {
+      get { return password_; }
+    }
+    
     public override bool IsInitialized {
       get {
         if (!hasVersion) return false;
+        if (!hasUsername) return false;
+        if (!hasPassword) return false;
         return true;
       }
     }
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
-      string[] field_names = _nMHelloFieldNames;
+      string[] field_names = _nMHelloSYNFieldNames;
       if (hasVersion) {
-        output.WriteInt32(1, field_names[0], Version);
+        output.WriteInt32(1, field_names[2], Version);
+      }
+      if (hasUsername) {
+        output.WriteString(2, field_names[1], Username);
+      }
+      if (hasPassword) {
+        output.WriteString(3, field_names[0], Password);
       }
       UnknownFields.WriteTo(output);
     }
@@ -119,57 +157,63 @@ namespace wowboss {
         if (hasVersion) {
           size += pb::CodedOutputStream.ComputeInt32Size(1, Version);
         }
+        if (hasUsername) {
+          size += pb::CodedOutputStream.ComputeStringSize(2, Username);
+        }
+        if (hasPassword) {
+          size += pb::CodedOutputStream.ComputeStringSize(3, Password);
+        }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
         return size;
       }
     }
     
-    public static NMHello ParseFrom(pb::ByteString data) {
+    public static NMHello_SYN ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static NMHello ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static NMHello_SYN ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static NMHello ParseFrom(byte[] data) {
+    public static NMHello_SYN ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static NMHello ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static NMHello_SYN ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static NMHello ParseFrom(global::System.IO.Stream input) {
+    public static NMHello_SYN ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static NMHello ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static NMHello_SYN ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    public static NMHello ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static NMHello_SYN ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
-    public static NMHello ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static NMHello_SYN ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
-    public static NMHello ParseFrom(pb::ICodedInputStream input) {
+    public static NMHello_SYN ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static NMHello ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static NMHello_SYN ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private NMHello MakeReadOnly() {
+    private NMHello_SYN MakeReadOnly() {
       return this;
     }
     
     public static Builder CreateBuilder() { return new Builder(); }
     public override Builder ToBuilder() { return CreateBuilder(this); }
     public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(NMHello prototype) {
+    public static Builder CreateBuilder(NMHello_SYN prototype) {
       return new Builder(prototype);
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ProtoGen", "2.4.1.473")]
-    public sealed partial class Builder : pb::GeneratedBuilder<NMHello, Builder> {
+    public sealed partial class Builder : pb::GeneratedBuilder<NMHello_SYN, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -177,18 +221,18 @@ namespace wowboss {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(NMHello cloneFrom) {
+      internal Builder(NMHello_SYN cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private NMHello result;
+      private NMHello_SYN result;
       
-      private NMHello PrepareBuilder() {
+      private NMHello_SYN PrepareBuilder() {
         if (resultIsReadOnly) {
-          NMHello original = result;
-          result = new NMHello();
+          NMHello_SYN original = result;
+          result = new NMHello_SYN();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -199,7 +243,7 @@ namespace wowboss {
         get { return result.IsInitialized; }
       }
       
-      protected override NMHello MessageBeingBuilt {
+      protected override NMHello_SYN MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -218,14 +262,14 @@ namespace wowboss {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::wowboss.NMHello.Descriptor; }
+        get { return global::wowboss.NMHello_SYN.Descriptor; }
       }
       
-      public override NMHello DefaultInstanceForType {
-        get { return global::wowboss.NMHello.DefaultInstance; }
+      public override NMHello_SYN DefaultInstanceForType {
+        get { return global::wowboss.NMHello_SYN.DefaultInstance; }
       }
       
-      public override NMHello BuildPartial() {
+      public override NMHello_SYN BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -234,19 +278,25 @@ namespace wowboss {
       }
       
       public override Builder MergeFrom(pb::IMessage other) {
-        if (other is NMHello) {
-          return MergeFrom((NMHello) other);
+        if (other is NMHello_SYN) {
+          return MergeFrom((NMHello_SYN) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(NMHello other) {
-        if (other == global::wowboss.NMHello.DefaultInstance) return this;
+      public override Builder MergeFrom(NMHello_SYN other) {
+        if (other == global::wowboss.NMHello_SYN.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasVersion) {
           Version = other.Version;
+        }
+        if (other.HasUsername) {
+          Username = other.Username;
+        }
+        if (other.HasPassword) {
+          Password = other.Password;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -263,9 +313,9 @@ namespace wowboss {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_nMHelloFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_nMHelloSYNFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _nMHelloFieldTags[field_ordinal];
+              tag = _nMHelloSYNFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -293,6 +343,14 @@ namespace wowboss {
             }
             case 8: {
               result.hasVersion = input.ReadInt32(ref result.version_);
+              break;
+            }
+            case 18: {
+              result.hasUsername = input.ReadString(ref result.username_);
+              break;
+            }
+            case 26: {
+              result.hasPassword = input.ReadString(ref result.password_);
               break;
             }
           }
@@ -324,8 +382,413 @@ namespace wowboss {
         result.version_ = 0;
         return this;
       }
+      
+      public bool HasUsername {
+        get { return result.hasUsername; }
+      }
+      public string Username {
+        get { return result.Username; }
+        set { SetUsername(value); }
+      }
+      public Builder SetUsername(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasUsername = true;
+        result.username_ = value;
+        return this;
+      }
+      public Builder ClearUsername() {
+        PrepareBuilder();
+        result.hasUsername = false;
+        result.username_ = "";
+        return this;
+      }
+      
+      public bool HasPassword {
+        get { return result.hasPassword; }
+      }
+      public string Password {
+        get { return result.Password; }
+        set { SetPassword(value); }
+      }
+      public Builder SetPassword(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasPassword = true;
+        result.password_ = value;
+        return this;
+      }
+      public Builder ClearPassword() {
+        PrepareBuilder();
+        result.hasPassword = false;
+        result.password_ = "";
+        return this;
+      }
     }
-    static NMHello() {
+    static NMHello_SYN() {
+      object.ReferenceEquals(global::wowboss.Netmessage.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+  [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ProtoGen", "2.4.1.473")]
+  public sealed partial class NMHello_ACK : pb::GeneratedMessage<NMHello_ACK, NMHello_ACK.Builder> {
+    private NMHello_ACK() { }
+    private static readonly NMHello_ACK defaultInstance = new NMHello_ACK().MakeReadOnly();
+    private static readonly string[] _nMHelloACKFieldNames = new string[] { "password_ok", "username_ok", "version_ok" };
+    private static readonly uint[] _nMHelloACKFieldTags = new uint[] { 24, 16, 8 };
+    public static NMHello_ACK DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override NMHello_ACK DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override NMHello_ACK ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::wowboss.Netmessage.internal__static_wowboss_NMHello_ACK__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<NMHello_ACK, NMHello_ACK.Builder> InternalFieldAccessors {
+      get { return global::wowboss.Netmessage.internal__static_wowboss_NMHello_ACK__FieldAccessorTable; }
+    }
+    
+    public const int VersionOkFieldNumber = 1;
+    private bool hasVersionOk;
+    private bool versionOk_;
+    public bool HasVersionOk {
+      get { return hasVersionOk; }
+    }
+    public bool VersionOk {
+      get { return versionOk_; }
+    }
+    
+    public const int UsernameOkFieldNumber = 2;
+    private bool hasUsernameOk;
+    private bool usernameOk_;
+    public bool HasUsernameOk {
+      get { return hasUsernameOk; }
+    }
+    public bool UsernameOk {
+      get { return usernameOk_; }
+    }
+    
+    public const int PasswordOkFieldNumber = 3;
+    private bool hasPasswordOk;
+    private bool passwordOk_;
+    public bool HasPasswordOk {
+      get { return hasPasswordOk; }
+    }
+    public bool PasswordOk {
+      get { return passwordOk_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasVersionOk) return false;
+        if (!hasUsernameOk) return false;
+        if (!hasPasswordOk) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _nMHelloACKFieldNames;
+      if (hasVersionOk) {
+        output.WriteBool(1, field_names[2], VersionOk);
+      }
+      if (hasUsernameOk) {
+        output.WriteBool(2, field_names[1], UsernameOk);
+      }
+      if (hasPasswordOk) {
+        output.WriteBool(3, field_names[0], PasswordOk);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasVersionOk) {
+          size += pb::CodedOutputStream.ComputeBoolSize(1, VersionOk);
+        }
+        if (hasUsernameOk) {
+          size += pb::CodedOutputStream.ComputeBoolSize(2, UsernameOk);
+        }
+        if (hasPasswordOk) {
+          size += pb::CodedOutputStream.ComputeBoolSize(3, PasswordOk);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static NMHello_ACK ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static NMHello_ACK ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static NMHello_ACK ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static NMHello_ACK ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static NMHello_ACK ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static NMHello_ACK ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static NMHello_ACK ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static NMHello_ACK ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static NMHello_ACK ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static NMHello_ACK ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private NMHello_ACK MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(NMHello_ACK prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ProtoGen", "2.4.1.473")]
+    public sealed partial class Builder : pb::GeneratedBuilder<NMHello_ACK, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(NMHello_ACK cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private NMHello_ACK result;
+      
+      private NMHello_ACK PrepareBuilder() {
+        if (resultIsReadOnly) {
+          NMHello_ACK original = result;
+          result = new NMHello_ACK();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override NMHello_ACK MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::wowboss.NMHello_ACK.Descriptor; }
+      }
+      
+      public override NMHello_ACK DefaultInstanceForType {
+        get { return global::wowboss.NMHello_ACK.DefaultInstance; }
+      }
+      
+      public override NMHello_ACK BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is NMHello_ACK) {
+          return MergeFrom((NMHello_ACK) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(NMHello_ACK other) {
+        if (other == global::wowboss.NMHello_ACK.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasVersionOk) {
+          VersionOk = other.VersionOk;
+        }
+        if (other.HasUsernameOk) {
+          UsernameOk = other.UsernameOk;
+        }
+        if (other.HasPasswordOk) {
+          PasswordOk = other.PasswordOk;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_nMHelloACKFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _nMHelloACKFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasVersionOk = input.ReadBool(ref result.versionOk_);
+              break;
+            }
+            case 16: {
+              result.hasUsernameOk = input.ReadBool(ref result.usernameOk_);
+              break;
+            }
+            case 24: {
+              result.hasPasswordOk = input.ReadBool(ref result.passwordOk_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasVersionOk {
+        get { return result.hasVersionOk; }
+      }
+      public bool VersionOk {
+        get { return result.VersionOk; }
+        set { SetVersionOk(value); }
+      }
+      public Builder SetVersionOk(bool value) {
+        PrepareBuilder();
+        result.hasVersionOk = true;
+        result.versionOk_ = value;
+        return this;
+      }
+      public Builder ClearVersionOk() {
+        PrepareBuilder();
+        result.hasVersionOk = false;
+        result.versionOk_ = false;
+        return this;
+      }
+      
+      public bool HasUsernameOk {
+        get { return result.hasUsernameOk; }
+      }
+      public bool UsernameOk {
+        get { return result.UsernameOk; }
+        set { SetUsernameOk(value); }
+      }
+      public Builder SetUsernameOk(bool value) {
+        PrepareBuilder();
+        result.hasUsernameOk = true;
+        result.usernameOk_ = value;
+        return this;
+      }
+      public Builder ClearUsernameOk() {
+        PrepareBuilder();
+        result.hasUsernameOk = false;
+        result.usernameOk_ = false;
+        return this;
+      }
+      
+      public bool HasPasswordOk {
+        get { return result.hasPasswordOk; }
+      }
+      public bool PasswordOk {
+        get { return result.PasswordOk; }
+        set { SetPasswordOk(value); }
+      }
+      public Builder SetPasswordOk(bool value) {
+        PrepareBuilder();
+        result.hasPasswordOk = true;
+        result.passwordOk_ = value;
+        return this;
+      }
+      public Builder ClearPasswordOk() {
+        PrepareBuilder();
+        result.hasPasswordOk = false;
+        result.passwordOk_ = false;
+        return this;
+      }
+    }
+    static NMHello_ACK() {
       object.ReferenceEquals(global::wowboss.Netmessage.Descriptor, null);
     }
   }
@@ -336,8 +799,8 @@ namespace wowboss {
   public sealed partial class NetMessage : pb::GeneratedMessage<NetMessage, NetMessage.Builder> {
     private NetMessage() { }
     private static readonly NetMessage defaultInstance = new NetMessage().MakeReadOnly();
-    private static readonly string[] _netMessageFieldNames = new string[] { "hello", "id" };
-    private static readonly uint[] _netMessageFieldTags = new uint[] { 18, 8 };
+    private static readonly string[] _netMessageFieldNames = new string[] { "hello_ack", "hello_syn", "id" };
+    private static readonly uint[] _netMessageFieldTags = new uint[] { 26, 18, 8 };
     public static NetMessage DefaultInstance {
       get { return defaultInstance; }
     }
@@ -366,7 +829,8 @@ namespace wowboss {
       [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
       [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ProtoGen", "2.4.1.473")]
       public enum MessageType {
-        HELLO = 0,
+        HELLO_SYN = 0,
+        HELLO_ACK = 1,
       }
       
     }
@@ -374,7 +838,7 @@ namespace wowboss {
     
     public const int IdFieldNumber = 1;
     private bool hasId;
-    private global::wowboss.NetMessage.Types.MessageType id_ = global::wowboss.NetMessage.Types.MessageType.HELLO;
+    private global::wowboss.NetMessage.Types.MessageType id_ = global::wowboss.NetMessage.Types.MessageType.HELLO_SYN;
     public bool HasId {
       get { return hasId; }
     }
@@ -382,21 +846,34 @@ namespace wowboss {
       get { return id_; }
     }
     
-    public const int HelloFieldNumber = 2;
-    private bool hasHello;
-    private global::wowboss.NMHello hello_;
-    public bool HasHello {
-      get { return hasHello; }
+    public const int HelloSynFieldNumber = 2;
+    private bool hasHelloSyn;
+    private global::wowboss.NMHello_SYN helloSyn_;
+    public bool HasHelloSyn {
+      get { return hasHelloSyn; }
     }
-    public global::wowboss.NMHello Hello {
-      get { return hello_ ?? global::wowboss.NMHello.DefaultInstance; }
+    public global::wowboss.NMHello_SYN HelloSyn {
+      get { return helloSyn_ ?? global::wowboss.NMHello_SYN.DefaultInstance; }
+    }
+    
+    public const int HelloAckFieldNumber = 3;
+    private bool hasHelloAck;
+    private global::wowboss.NMHello_ACK helloAck_;
+    public bool HasHelloAck {
+      get { return hasHelloAck; }
+    }
+    public global::wowboss.NMHello_ACK HelloAck {
+      get { return helloAck_ ?? global::wowboss.NMHello_ACK.DefaultInstance; }
     }
     
     public override bool IsInitialized {
       get {
         if (!hasId) return false;
-        if (HasHello) {
-          if (!Hello.IsInitialized) return false;
+        if (HasHelloSyn) {
+          if (!HelloSyn.IsInitialized) return false;
+        }
+        if (HasHelloAck) {
+          if (!HelloAck.IsInitialized) return false;
         }
         return true;
       }
@@ -406,10 +883,13 @@ namespace wowboss {
       int size = SerializedSize;
       string[] field_names = _netMessageFieldNames;
       if (hasId) {
-        output.WriteEnum(1, field_names[1], (int) Id, Id);
+        output.WriteEnum(1, field_names[2], (int) Id, Id);
       }
-      if (hasHello) {
-        output.WriteMessage(2, field_names[0], Hello);
+      if (hasHelloSyn) {
+        output.WriteMessage(2, field_names[1], HelloSyn);
+      }
+      if (hasHelloAck) {
+        output.WriteMessage(3, field_names[0], HelloAck);
       }
       UnknownFields.WriteTo(output);
     }
@@ -424,8 +904,11 @@ namespace wowboss {
         if (hasId) {
           size += pb::CodedOutputStream.ComputeEnumSize(1, (int) Id);
         }
-        if (hasHello) {
-          size += pb::CodedOutputStream.ComputeMessageSize(2, Hello);
+        if (hasHelloSyn) {
+          size += pb::CodedOutputStream.ComputeMessageSize(2, HelloSyn);
+        }
+        if (hasHelloAck) {
+          size += pb::CodedOutputStream.ComputeMessageSize(3, HelloAck);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -556,8 +1039,11 @@ namespace wowboss {
         if (other.HasId) {
           Id = other.Id;
         }
-        if (other.HasHello) {
-          MergeHello(other.Hello);
+        if (other.HasHelloSyn) {
+          MergeHelloSyn(other.HelloSyn);
+        }
+        if (other.HasHelloAck) {
+          MergeHelloAck(other.HelloAck);
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -615,12 +1101,21 @@ namespace wowboss {
               break;
             }
             case 18: {
-              global::wowboss.NMHello.Builder subBuilder = global::wowboss.NMHello.CreateBuilder();
-              if (result.hasHello) {
-                subBuilder.MergeFrom(Hello);
+              global::wowboss.NMHello_SYN.Builder subBuilder = global::wowboss.NMHello_SYN.CreateBuilder();
+              if (result.hasHelloSyn) {
+                subBuilder.MergeFrom(HelloSyn);
               }
               input.ReadMessage(subBuilder, extensionRegistry);
-              Hello = subBuilder.BuildPartial();
+              HelloSyn = subBuilder.BuildPartial();
+              break;
+            }
+            case 26: {
+              global::wowboss.NMHello_ACK.Builder subBuilder = global::wowboss.NMHello_ACK.CreateBuilder();
+              if (result.hasHelloAck) {
+                subBuilder.MergeFrom(HelloAck);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              HelloAck = subBuilder.BuildPartial();
               break;
             }
           }
@@ -649,47 +1144,87 @@ namespace wowboss {
       public Builder ClearId() {
         PrepareBuilder();
         result.hasId = false;
-        result.id_ = global::wowboss.NetMessage.Types.MessageType.HELLO;
+        result.id_ = global::wowboss.NetMessage.Types.MessageType.HELLO_SYN;
         return this;
       }
       
-      public bool HasHello {
-       get { return result.hasHello; }
+      public bool HasHelloSyn {
+       get { return result.hasHelloSyn; }
       }
-      public global::wowboss.NMHello Hello {
-        get { return result.Hello; }
-        set { SetHello(value); }
+      public global::wowboss.NMHello_SYN HelloSyn {
+        get { return result.HelloSyn; }
+        set { SetHelloSyn(value); }
       }
-      public Builder SetHello(global::wowboss.NMHello value) {
+      public Builder SetHelloSyn(global::wowboss.NMHello_SYN value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasHello = true;
-        result.hello_ = value;
+        result.hasHelloSyn = true;
+        result.helloSyn_ = value;
         return this;
       }
-      public Builder SetHello(global::wowboss.NMHello.Builder builderForValue) {
+      public Builder SetHelloSyn(global::wowboss.NMHello_SYN.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.hasHello = true;
-        result.hello_ = builderForValue.Build();
+        result.hasHelloSyn = true;
+        result.helloSyn_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeHello(global::wowboss.NMHello value) {
+      public Builder MergeHelloSyn(global::wowboss.NMHello_SYN value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        if (result.hasHello &&
-            result.hello_ != global::wowboss.NMHello.DefaultInstance) {
-            result.hello_ = global::wowboss.NMHello.CreateBuilder(result.hello_).MergeFrom(value).BuildPartial();
+        if (result.hasHelloSyn &&
+            result.helloSyn_ != global::wowboss.NMHello_SYN.DefaultInstance) {
+            result.helloSyn_ = global::wowboss.NMHello_SYN.CreateBuilder(result.helloSyn_).MergeFrom(value).BuildPartial();
         } else {
-          result.hello_ = value;
+          result.helloSyn_ = value;
         }
-        result.hasHello = true;
+        result.hasHelloSyn = true;
         return this;
       }
-      public Builder ClearHello() {
+      public Builder ClearHelloSyn() {
         PrepareBuilder();
-        result.hasHello = false;
-        result.hello_ = null;
+        result.hasHelloSyn = false;
+        result.helloSyn_ = null;
+        return this;
+      }
+      
+      public bool HasHelloAck {
+       get { return result.hasHelloAck; }
+      }
+      public global::wowboss.NMHello_ACK HelloAck {
+        get { return result.HelloAck; }
+        set { SetHelloAck(value); }
+      }
+      public Builder SetHelloAck(global::wowboss.NMHello_ACK value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasHelloAck = true;
+        result.helloAck_ = value;
+        return this;
+      }
+      public Builder SetHelloAck(global::wowboss.NMHello_ACK.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasHelloAck = true;
+        result.helloAck_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeHelloAck(global::wowboss.NMHello_ACK value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasHelloAck &&
+            result.helloAck_ != global::wowboss.NMHello_ACK.DefaultInstance) {
+            result.helloAck_ = global::wowboss.NMHello_ACK.CreateBuilder(result.helloAck_).MergeFrom(value).BuildPartial();
+        } else {
+          result.helloAck_ = value;
+        }
+        result.hasHelloAck = true;
+        return this;
+      }
+      public Builder ClearHelloAck() {
+        PrepareBuilder();
+        result.hasHelloAck = false;
+        result.helloAck_ = null;
         return this;
       }
     }

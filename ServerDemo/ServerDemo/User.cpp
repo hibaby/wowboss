@@ -1,5 +1,6 @@
 #include "User.h"
 #include "NetMessage.h"
+#include "Log.h"
 
 CUser::CUser(void)
 	: m_lpSession(NULL)
@@ -26,13 +27,21 @@ void CUser::ProcessNetMessage()
 	wowboss::NetMessage msg;
 	while ( m_lpSession->PeekAMessage( msg ) )
 	{
-		printf( "/************************************************\n"
-			    "Recv Message\n"
-				"%s"
-				"/************************************************\n"
-			, msg.DebugString().c_str() );
-		if ( wowboss::NetMessage_MessageType_HELLO == msg.id() )
+		m_lpSession->PopAMessage();
+		if ( wowboss::NetMessage_MessageType_HELLO_SYN == msg.id() )
 		{
+			// msg.version()
+			// msg.username();
+			// msg.password();
+			wowboss::NetMessage msgAck; 
+			msgAck.set_id( wowboss::NetMessage_MessageType_HELLO_ACK );
+
+			msgAck.mutable_hello_ack()->set_version_ok( true );
+			msgAck.mutable_hello_ack()->set_username_ok( true );
+			msgAck.mutable_hello_ack()->set_password_ok( true );
+
+			m_lpSession->Send( &msgAck );
+
 /*			char username[256] = "";
 			char password[256];
 			byte size = 0;
@@ -41,6 +50,5 @@ void CUser::ProcessNetMessage()
 			printf( "PeekAMessage %u, %s, %s\n", msg.GetType(), username, password );
 */
 		}
-		m_lpSession->PopAMessage();
 	}
 }

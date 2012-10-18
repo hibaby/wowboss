@@ -31,8 +31,12 @@ void CClient::OnConnect(CNetSession* pStream)
 	msg.Push( (byte*)password, sizeof(password) );
 	pStream->Send(msg);
 */
+
 	wowboss::NetMessage msg; 
-	msg.set_id( wowboss::NetMessage_MessageType_HELLO );
+	msg.set_id( wowboss::NetMessage_MessageType_HELLO_SYN );
+	msg.mutable_hello_syn()->set_version( 1000 );
+	msg.mutable_hello_syn()->set_username( "user_pc" );
+	msg.mutable_hello_syn()->set_password( "pswd_pc" );
 	pStream->Send( &msg );
 };
 

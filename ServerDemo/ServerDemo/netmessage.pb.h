@@ -32,15 +32,17 @@ void  protobuf_AddDesc_netmessage_2eproto();
 void protobuf_AssignDesc_netmessage_2eproto();
 void protobuf_ShutdownFile_netmessage_2eproto();
 
-class NMHello;
+class NMHello_SYN;
+class NMHello_ACK;
 class NetMessage;
 
 enum NetMessage_MessageType {
-  NetMessage_MessageType_HELLO = 0
+  NetMessage_MessageType_HELLO_SYN = 0,
+  NetMessage_MessageType_HELLO_ACK = 1
 };
 bool NetMessage_MessageType_IsValid(int value);
-const NetMessage_MessageType NetMessage_MessageType_MessageType_MIN = NetMessage_MessageType_HELLO;
-const NetMessage_MessageType NetMessage_MessageType_MessageType_MAX = NetMessage_MessageType_HELLO;
+const NetMessage_MessageType NetMessage_MessageType_MessageType_MIN = NetMessage_MessageType_HELLO_SYN;
+const NetMessage_MessageType NetMessage_MessageType_MessageType_MAX = NetMessage_MessageType_HELLO_ACK;
 const int NetMessage_MessageType_MessageType_ARRAYSIZE = NetMessage_MessageType_MessageType_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* NetMessage_MessageType_descriptor();
@@ -55,14 +57,14 @@ inline bool NetMessage_MessageType_Parse(
 }
 // ===================================================================
 
-class NMHello : public ::google::protobuf::Message {
+class NMHello_SYN : public ::google::protobuf::Message {
  public:
-  NMHello();
-  virtual ~NMHello();
+  NMHello_SYN();
+  virtual ~NMHello_SYN();
   
-  NMHello(const NMHello& from);
+  NMHello_SYN(const NMHello_SYN& from);
   
-  inline NMHello& operator=(const NMHello& from) {
+  inline NMHello_SYN& operator=(const NMHello_SYN& from) {
     CopyFrom(from);
     return *this;
   }
@@ -76,17 +78,17 @@ class NMHello : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const NMHello& default_instance();
+  static const NMHello_SYN& default_instance();
   
-  void Swap(NMHello* other);
+  void Swap(NMHello_SYN* other);
   
   // implements Message ----------------------------------------------
   
-  NMHello* New() const;
+  NMHello_SYN* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const NMHello& from);
-  void MergeFrom(const NMHello& from);
+  void CopyFrom(const NMHello_SYN& from);
+  void MergeFrom(const NMHello_SYN& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -116,24 +118,154 @@ class NMHello : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 version() const;
   inline void set_version(::google::protobuf::int32 value);
   
-  // @@protoc_insertion_point(class_scope:wowboss.NMHello)
+  // required string username = 2;
+  inline bool has_username() const;
+  inline void clear_username();
+  static const int kUsernameFieldNumber = 2;
+  inline const ::std::string& username() const;
+  inline void set_username(const ::std::string& value);
+  inline void set_username(const char* value);
+  inline void set_username(const char* value, size_t size);
+  inline ::std::string* mutable_username();
+  inline ::std::string* release_username();
+  
+  // required string password = 3;
+  inline bool has_password() const;
+  inline void clear_password();
+  static const int kPasswordFieldNumber = 3;
+  inline const ::std::string& password() const;
+  inline void set_password(const ::std::string& value);
+  inline void set_password(const char* value);
+  inline void set_password(const char* value, size_t size);
+  inline ::std::string* mutable_password();
+  inline ::std::string* release_password();
+  
+  // @@protoc_insertion_point(class_scope:wowboss.NMHello_SYN)
  private:
   inline void set_has_version();
   inline void clear_has_version();
+  inline void set_has_username();
+  inline void clear_has_username();
+  inline void set_has_password();
+  inline void clear_has_password();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
+  ::std::string* username_;
+  ::std::string* password_;
   ::google::protobuf::int32 version_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
   
   friend void  protobuf_AddDesc_netmessage_2eproto();
   friend void protobuf_AssignDesc_netmessage_2eproto();
   friend void protobuf_ShutdownFile_netmessage_2eproto();
   
   void InitAsDefaultInstance();
-  static NMHello* default_instance_;
+  static NMHello_SYN* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class NMHello_ACK : public ::google::protobuf::Message {
+ public:
+  NMHello_ACK();
+  virtual ~NMHello_ACK();
+  
+  NMHello_ACK(const NMHello_ACK& from);
+  
+  inline NMHello_ACK& operator=(const NMHello_ACK& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const NMHello_ACK& default_instance();
+  
+  void Swap(NMHello_ACK* other);
+  
+  // implements Message ----------------------------------------------
+  
+  NMHello_ACK* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const NMHello_ACK& from);
+  void MergeFrom(const NMHello_ACK& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // required bool version_ok = 1;
+  inline bool has_version_ok() const;
+  inline void clear_version_ok();
+  static const int kVersionOkFieldNumber = 1;
+  inline bool version_ok() const;
+  inline void set_version_ok(bool value);
+  
+  // required bool username_ok = 2;
+  inline bool has_username_ok() const;
+  inline void clear_username_ok();
+  static const int kUsernameOkFieldNumber = 2;
+  inline bool username_ok() const;
+  inline void set_username_ok(bool value);
+  
+  // required bool password_ok = 3;
+  inline bool has_password_ok() const;
+  inline void clear_password_ok();
+  static const int kPasswordOkFieldNumber = 3;
+  inline bool password_ok() const;
+  inline void set_password_ok(bool value);
+  
+  // @@protoc_insertion_point(class_scope:wowboss.NMHello_ACK)
+ private:
+  inline void set_has_version_ok();
+  inline void clear_has_version_ok();
+  inline void set_has_username_ok();
+  inline void clear_has_username_ok();
+  inline void set_has_password_ok();
+  inline void clear_has_password_ok();
+  
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  
+  bool version_ok_;
+  bool username_ok_;
+  bool password_ok_;
+  
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  
+  friend void  protobuf_AddDesc_netmessage_2eproto();
+  friend void protobuf_AssignDesc_netmessage_2eproto();
+  friend void protobuf_ShutdownFile_netmessage_2eproto();
+  
+  void InitAsDefaultInstance();
+  static NMHello_ACK* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -190,7 +322,8 @@ class NetMessage : public ::google::protobuf::Message {
   // nested types ----------------------------------------------------
   
   typedef NetMessage_MessageType MessageType;
-  static const MessageType HELLO = NetMessage_MessageType_HELLO;
+  static const MessageType HELLO_SYN = NetMessage_MessageType_HELLO_SYN;
+  static const MessageType HELLO_ACK = NetMessage_MessageType_HELLO_ACK;
   static inline bool MessageType_IsValid(int value) {
     return NetMessage_MessageType_IsValid(value);
   }
@@ -221,28 +354,39 @@ class NetMessage : public ::google::protobuf::Message {
   inline ::wowboss::NetMessage_MessageType id() const;
   inline void set_id(::wowboss::NetMessage_MessageType value);
   
-  // optional .wowboss.NMHello hello = 2;
-  inline bool has_hello() const;
-  inline void clear_hello();
-  static const int kHelloFieldNumber = 2;
-  inline const ::wowboss::NMHello& hello() const;
-  inline ::wowboss::NMHello* mutable_hello();
-  inline ::wowboss::NMHello* release_hello();
+  // optional .wowboss.NMHello_SYN hello_syn = 2;
+  inline bool has_hello_syn() const;
+  inline void clear_hello_syn();
+  static const int kHelloSynFieldNumber = 2;
+  inline const ::wowboss::NMHello_SYN& hello_syn() const;
+  inline ::wowboss::NMHello_SYN* mutable_hello_syn();
+  inline ::wowboss::NMHello_SYN* release_hello_syn();
+  
+  // optional .wowboss.NMHello_ACK hello_ack = 3;
+  inline bool has_hello_ack() const;
+  inline void clear_hello_ack();
+  static const int kHelloAckFieldNumber = 3;
+  inline const ::wowboss::NMHello_ACK& hello_ack() const;
+  inline ::wowboss::NMHello_ACK* mutable_hello_ack();
+  inline ::wowboss::NMHello_ACK* release_hello_ack();
   
   // @@protoc_insertion_point(class_scope:wowboss.NetMessage)
  private:
   inline void set_has_id();
   inline void clear_has_id();
-  inline void set_has_hello();
-  inline void clear_has_hello();
+  inline void set_has_hello_syn();
+  inline void clear_has_hello_syn();
+  inline void set_has_hello_ack();
+  inline void clear_has_hello_ack();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
-  ::wowboss::NMHello* hello_;
+  ::wowboss::NMHello_SYN* hello_syn_;
+  ::wowboss::NMHello_ACK* hello_ack_;
   int id_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
   
   friend void  protobuf_AddDesc_netmessage_2eproto();
   friend void protobuf_AssignDesc_netmessage_2eproto();
@@ -256,28 +400,214 @@ class NetMessage : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// NMHello
+// NMHello_SYN
 
 // required int32 version = 1;
-inline bool NMHello::has_version() const {
+inline bool NMHello_SYN::has_version() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void NMHello::set_has_version() {
+inline void NMHello_SYN::set_has_version() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void NMHello::clear_has_version() {
+inline void NMHello_SYN::clear_has_version() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void NMHello::clear_version() {
+inline void NMHello_SYN::clear_version() {
   version_ = 0;
   clear_has_version();
 }
-inline ::google::protobuf::int32 NMHello::version() const {
+inline ::google::protobuf::int32 NMHello_SYN::version() const {
   return version_;
 }
-inline void NMHello::set_version(::google::protobuf::int32 value) {
+inline void NMHello_SYN::set_version(::google::protobuf::int32 value) {
   set_has_version();
   version_ = value;
+}
+
+// required string username = 2;
+inline bool NMHello_SYN::has_username() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void NMHello_SYN::set_has_username() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void NMHello_SYN::clear_has_username() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void NMHello_SYN::clear_username() {
+  if (username_ != &::google::protobuf::internal::kEmptyString) {
+    username_->clear();
+  }
+  clear_has_username();
+}
+inline const ::std::string& NMHello_SYN::username() const {
+  return *username_;
+}
+inline void NMHello_SYN::set_username(const ::std::string& value) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::kEmptyString) {
+    username_ = new ::std::string;
+  }
+  username_->assign(value);
+}
+inline void NMHello_SYN::set_username(const char* value) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::kEmptyString) {
+    username_ = new ::std::string;
+  }
+  username_->assign(value);
+}
+inline void NMHello_SYN::set_username(const char* value, size_t size) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::kEmptyString) {
+    username_ = new ::std::string;
+  }
+  username_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* NMHello_SYN::mutable_username() {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::kEmptyString) {
+    username_ = new ::std::string;
+  }
+  return username_;
+}
+inline ::std::string* NMHello_SYN::release_username() {
+  clear_has_username();
+  if (username_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = username_;
+    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// required string password = 3;
+inline bool NMHello_SYN::has_password() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void NMHello_SYN::set_has_password() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void NMHello_SYN::clear_has_password() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void NMHello_SYN::clear_password() {
+  if (password_ != &::google::protobuf::internal::kEmptyString) {
+    password_->clear();
+  }
+  clear_has_password();
+}
+inline const ::std::string& NMHello_SYN::password() const {
+  return *password_;
+}
+inline void NMHello_SYN::set_password(const ::std::string& value) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(value);
+}
+inline void NMHello_SYN::set_password(const char* value) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(value);
+}
+inline void NMHello_SYN::set_password(const char* value, size_t size) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* NMHello_SYN::mutable_password() {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  return password_;
+}
+inline ::std::string* NMHello_SYN::release_password() {
+  clear_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = password_;
+    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// -------------------------------------------------------------------
+
+// NMHello_ACK
+
+// required bool version_ok = 1;
+inline bool NMHello_ACK::has_version_ok() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void NMHello_ACK::set_has_version_ok() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void NMHello_ACK::clear_has_version_ok() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void NMHello_ACK::clear_version_ok() {
+  version_ok_ = false;
+  clear_has_version_ok();
+}
+inline bool NMHello_ACK::version_ok() const {
+  return version_ok_;
+}
+inline void NMHello_ACK::set_version_ok(bool value) {
+  set_has_version_ok();
+  version_ok_ = value;
+}
+
+// required bool username_ok = 2;
+inline bool NMHello_ACK::has_username_ok() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void NMHello_ACK::set_has_username_ok() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void NMHello_ACK::clear_has_username_ok() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void NMHello_ACK::clear_username_ok() {
+  username_ok_ = false;
+  clear_has_username_ok();
+}
+inline bool NMHello_ACK::username_ok() const {
+  return username_ok_;
+}
+inline void NMHello_ACK::set_username_ok(bool value) {
+  set_has_username_ok();
+  username_ok_ = value;
+}
+
+// required bool password_ok = 3;
+inline bool NMHello_ACK::has_password_ok() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void NMHello_ACK::set_has_password_ok() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void NMHello_ACK::clear_has_password_ok() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void NMHello_ACK::clear_password_ok() {
+  password_ok_ = false;
+  clear_has_password_ok();
+}
+inline bool NMHello_ACK::password_ok() const {
+  return password_ok_;
+}
+inline void NMHello_ACK::set_password_ok(bool value) {
+  set_has_password_ok();
+  password_ok_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -307,32 +637,61 @@ inline void NetMessage::set_id(::wowboss::NetMessage_MessageType value) {
   id_ = value;
 }
 
-// optional .wowboss.NMHello hello = 2;
-inline bool NetMessage::has_hello() const {
+// optional .wowboss.NMHello_SYN hello_syn = 2;
+inline bool NetMessage::has_hello_syn() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void NetMessage::set_has_hello() {
+inline void NetMessage::set_has_hello_syn() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void NetMessage::clear_has_hello() {
+inline void NetMessage::clear_has_hello_syn() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void NetMessage::clear_hello() {
-  if (hello_ != NULL) hello_->::wowboss::NMHello::Clear();
-  clear_has_hello();
+inline void NetMessage::clear_hello_syn() {
+  if (hello_syn_ != NULL) hello_syn_->::wowboss::NMHello_SYN::Clear();
+  clear_has_hello_syn();
 }
-inline const ::wowboss::NMHello& NetMessage::hello() const {
-  return hello_ != NULL ? *hello_ : *default_instance_->hello_;
+inline const ::wowboss::NMHello_SYN& NetMessage::hello_syn() const {
+  return hello_syn_ != NULL ? *hello_syn_ : *default_instance_->hello_syn_;
 }
-inline ::wowboss::NMHello* NetMessage::mutable_hello() {
-  set_has_hello();
-  if (hello_ == NULL) hello_ = new ::wowboss::NMHello;
-  return hello_;
+inline ::wowboss::NMHello_SYN* NetMessage::mutable_hello_syn() {
+  set_has_hello_syn();
+  if (hello_syn_ == NULL) hello_syn_ = new ::wowboss::NMHello_SYN;
+  return hello_syn_;
 }
-inline ::wowboss::NMHello* NetMessage::release_hello() {
-  clear_has_hello();
-  ::wowboss::NMHello* temp = hello_;
-  hello_ = NULL;
+inline ::wowboss::NMHello_SYN* NetMessage::release_hello_syn() {
+  clear_has_hello_syn();
+  ::wowboss::NMHello_SYN* temp = hello_syn_;
+  hello_syn_ = NULL;
+  return temp;
+}
+
+// optional .wowboss.NMHello_ACK hello_ack = 3;
+inline bool NetMessage::has_hello_ack() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void NetMessage::set_has_hello_ack() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void NetMessage::clear_has_hello_ack() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void NetMessage::clear_hello_ack() {
+  if (hello_ack_ != NULL) hello_ack_->::wowboss::NMHello_ACK::Clear();
+  clear_has_hello_ack();
+}
+inline const ::wowboss::NMHello_ACK& NetMessage::hello_ack() const {
+  return hello_ack_ != NULL ? *hello_ack_ : *default_instance_->hello_ack_;
+}
+inline ::wowboss::NMHello_ACK* NetMessage::mutable_hello_ack() {
+  set_has_hello_ack();
+  if (hello_ack_ == NULL) hello_ack_ = new ::wowboss::NMHello_ACK;
+  return hello_ack_;
+}
+inline ::wowboss::NMHello_ACK* NetMessage::release_hello_ack() {
+  clear_has_hello_ack();
+  ::wowboss::NMHello_ACK* temp = hello_ack_;
+  hello_ack_ = NULL;
   return temp;
 }
 
