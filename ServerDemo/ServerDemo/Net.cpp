@@ -237,8 +237,8 @@ void CNet::Process()
 					}
 					else if ( 0 == recvSize )
 					{
-						// 如果recv函数在等待协议接收数据时网络中断了，那么它返回0。
-						LOG_ERROR( "recv failed[Err_%d]", WSAGetLastError() );
+						// If the connection has been gracefully closed, the return value is zero
+						LOG_DETAIL( "the connection has been gracefully closed" );
 						break;
 					}
 					pStream->EndRecv(recvSize);
