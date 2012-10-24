@@ -17,6 +17,7 @@ wowboss/*.exe
 wowboss/*.csproj
 wowboss/*.sln
 wowboss/*.userprefs
+wowboss/*.pidb
 wowboss/Library
 
 # ºöÂÔvs2010ÎÄ¼þ
