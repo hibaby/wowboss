@@ -3,25 +3,66 @@ using System.Collections;
 
 public class Login : MonoBehaviour {
 	
-	public Texture btnTextureLogin;
+	public GameObject account;
+	public GameObject password;
+	
+	float mLastClick = 0f;
+	bool mStarted = false;
+	bool mHighlighted = false;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
-	void OnGUI() {
-		if (!btnTextureLogin) {
-			Debug.LogError("Please assign a texture on the inspector");
-			return;
+	void Start () { mStarted = true; }
+
+	void OnEnable () { if (mStarted && mHighlighted) OnHover(UICamera.IsHighlighted(gameObject)); }
+
+	void OnHover (bool isOver)
+	{
+		if (enabled)
+		{
+//			if (((isOver && trigger == Trigger.OnMouseOver) ||
+//				(!isOver && trigger == Trigger.OnMouseOut))) Send();
+			mHighlighted = isOver;
 		}
-		if (GUI.Button(new Rect(10, 10, 200, 200), btnTextureLogin)) {
-			Debug.Log("Clicked the button with an image");     
+	}
+
+	void OnPress (bool isPressed)
+	{
+		if (enabled)
+		{
+			/*
+			if (((isPressed && trigger == Trigger.OnPress) ||
+				(!isPressed && trigger == Trigger.OnRelease)))
+			{
+				Send();
+			}
+			*/
+		}
+	}
+
+	void OnClick ()
+	{
+		if (enabled)
+		{
+			float time = Time.realtimeSinceStartup;
+
+			if (mLastClick + 0.2f > time)
+			{
+				//if (trigger == Trigger.OnDoubleClick)
+				
+			}
+			//else if (trigger == Trigger.OnClick)
+			//{
+			//}
+			string sAccount = account.GetComponent<UILabel>().text;
+			string sPassword = password.GetComponent<UILabel>().text;
+			
+			Debug.Log( sAccount );
+			Debug.Log( sPassword );
+			
+			Application.LoadLevel("test");
+			
+			
+			
+			mLastClick = time;
 		}
 	}
 }
