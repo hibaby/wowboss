@@ -52,12 +52,9 @@ public class Login : MonoBehaviour {
 			//else if (trigger == Trigger.OnClick)
 			//{
 			//}
-			string sAccount = account.GetComponent<UILabel>().text;
-			string sPassword = password.GetComponent<UILabel>().text;
-			
-			Debug.Log( sAccount );
-			Debug.Log( sPassword );
-			
+			GameData.Account = account.GetComponent<UILabel>().text;
+			GameData.Password = password.GetComponent<UILabel>().text;
+						
 			Application.LoadLevel("test");
 			
 			
