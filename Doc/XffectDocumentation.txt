@@ -1,0 +1,113 @@
+    Xffect Pro是Unity3d上的一款特效插件，附带着几个不错的特效制作实例，对于程序来说算是个不错的美术入门教程。
+    Xffect Component(XffectComponent.cs)是特效的核心组件管理着一个或者多个Effect Layer(EffectLayer.cs)
+    Effect Layer(EffectLayer.cs)特效最基本的组件，目前支持Scale，UV，Rotate等基础的特效编辑
+    Xffect还提供Xffect Cache(XffectCache.cs)提供特效缓存支持
+
+    Xffect Component
+    是最基本的组件，它负责管理所有的Effect Layer，包括更新，渲染，以及生命周期。在渲染方面，它会保证包含相同Material的Effect Layer由一个Mesh来渲染他们，这将极大地提高性能。
+    life                       是整个特效的生命周期，单位为秒，-1表示无限大。当它的生命时间超过该值时，整个Object(包括所有Effect Layer)会变为non-active。如需重新启动，可调用API：Active()函数。
+    Add Layer                  点击后会在自动生成一个Effect Layer。你也可以直接拖拽或者copy其他Effect Layer到该Xffect Component下，效果一样。
+    update in editor           勾选后，该Xffect将会在编辑器内更新并显示。
+    Reset Editor Xffect        点击后，编辑器内更新的Xffect将会被重置。
+    (当life为-1时，如果该Xffect没有任何活跃节点，那么它还是会自动销毁。)
+
+
+    Effect Layer
+    是整个Xffect的核心，他包含了一个全新的粒子系统以及各式各样的Affector。
+    render type                指定渲染类型，目前支持的有：Sprite, RibbonTrail, Cone。
+        Sprite                 一个包含4 vertices，6 indices的四边形。
+        Ribbon Trail           参考OGRE里的Ribbon Trail编写，类似Unity自带的Trail Renderer，但是效果更好。
+        Cone                   一个圆锥体，可以指定角度以及分段数。
+    client transform           默认为该Effect Layer本身，所有节点的起始世界坐标都将以它的位置作为参考。
+    sync to client pos         勾选上后，所有节点的移动都将在client坐标系下。
+    material                   该Effect Layer的渲染材质，新创建Effet Layer时需要指定。
+    delay                      指定该Effect Layer将延迟多少秒后开始更新。
+    Max FPS                    指定该Effect Layer更新的最大频率，一般不需要设置。
+    Draw Debug                 默认开启，将会在编辑器内显示Debug信息。
+
+    Effect Layer:Sprite
+    sprite type
+        Billboard              该sprite将会一直面向Camera。
+        Billboard Self         该sprite将会沿着original direction旋转，使它面向Camera，实际上它相当于只包括2个点的Ribbon Trail。
+        XZ Plane               Sprite将会在XZ平面内。
+    uv stretch                 指定Billboard Self的UV方向。
+    original point             指定中心位置，具体请参考下图。
+    width, height              指定Sprite的初始大小。
+    original point会影响Sprite的Rotate和Scale，利用这点可以达到不同的效果。
+    关于Billboard Self，请参考下图，红色线条为它的original direction，它将绕着这条线旋转，使之面对摄像机。与Billboard不同的是，Billboard没有这个约束，它会绕着任意轴旋转后面对摄像机。
+
+    Effect Layer: Ribbon Trail
+    max elements越大，trail精度越大，线条越平滑，但是一般建议不要超过50个。
+    你可以按照上面的设置自己试试效果，client transform设置为其他Object，并且勾选上sync to client pos，然后拖动Object观察效果。
+    1.1.2版本增加：slash trail:该选项主要用于制作一些刀剑的拖尾效果，但是需要指定“face to object”，因为这种拖尾效果并不是面向摄像机的，而一般是垂直与武器运动的方向，所以只需添加一个GameObject在武器节点下，并让该Object垂直与武器的平面，如果发现方向不对，那么把Object移动到另外一面垂直即可。  
+
+    Effect Layer:Cone
+    size                        指定宽度与高度。
+    segment                     指定底部圆形的分段数(>=3)，值越大，圆越光滑。
+    angle                       指定扩散角度(0-90)。
+    angle change                指定扩散角度随时间的变化。
+
+    Effect Layer: Rotate
+    random original rotation    勾选上则每个节点的初始Rotation都是随机的，在original rotation min与original rotation max之间。
+    rotate change type          指定旋转随时间的变化，Simple是每秒旋转delta angle per second度； Curve则是自定义旋转角度随时间的变化。
+    Note:
+    1，the rotation axis is the "Sprite Configuration"'s "original point":
+    2，BillboardSelf建议不要使用Rotate参数，可以用"XZ Plane"设置好方向后代替。
+
+    Effect Layer:Scale
+    original scale              指定初始scale。
+    scale change type           指定scale随时间的变化，Simple是每秒变化delta个单位，Curve则是自定义scale随时间的变化。
+
+    Effect Layer: Color
+    color change type:
+        None                    节点颜色不会变化
+        2Gradual                节点颜色将会在2个颜色范围内变化
+        5Gradual                节点颜色将会在5个颜色范围内变化
+    gradual time                颜色变化周期，指定为-1则周期与Node Life同步
+    gradual type:
+        Clamp                   颜色只变化一次
+        Loop                    当颜色渐变完毕，从头重新开始渐变
+        Reverse                 当颜色渐变完毕，反向开始渐变
+
+    Effect Layer: UV
+    original top left uv        指定UV范围。
+    original uv dimensions      指定UV范围。
+    UV Change Type:
+        None                    UV将不会随时间变化
+        Build UV Animation      根据tile切片划分来播放动画
+        UV Scroll               旋转UV，注意该选项必须设置texture Wrap Mode为Repeat
+    Build UV Animation:
+        x tile                  x方向上的切片数量
+        y tile                  y方向上的切片数量
+        time                    动画变化周期，-1则与节点life同步
+        loop                    播放次数，-1为无数次
+    UV Scroll:
+        x scroll speed          x方向上的scroll速度
+        y scroll speed          y方向上的scroll速度
+        注意，以上两个值一般在0-1之间
+
+
+    Effect Layer:Emitter
+    emitter type:
+        Point                    所有节点将由一个点生成
+        Box                      所有节点的生成在一个Box内
+        Sphere Surface           所有节点将在一个球面上生成，并且默认方向为从球心指向该节点
+        Circle                   所有节点在一个圆形内生成
+        Line                     所有节点在一条线上生成，线条方向为client的forward方向
+        Mesh                     所有节点在指定Mesh上生成，支持点与面的生成位置
+    max nodes                    指定emitter所能生成的最多节点数，一般不超过100。
+    is node life loop            勾选上则生成的每个节点都永远不会销毁。
+    node life min                指定生成的每个节点的生命周期范围。
+    node life max                指定生成的每个节点的生命周期范围。
+    emit by distance             勾选上则节点的生成会根据client transform移动的距离来生成，若静止，则不会生成。
+    chance to emit per loop      每个循环生成节点的几率，用于给予一些随机性。
+    emit duration                emitter每个发射周期的持续时间，当超过该值后，则loop count减1，当loop count等于0时，停止发射。
+    emit rate                    发射速率，单位为秒。
+    loop count                   发射循环的次数，-1为无限大。
+    delay after each loop        指定每轮发射循环完毕后，停顿多少秒后重新开始
+
+    Effect Layer:Direction
+    original direction           用于指定每个节点的初始方向以及速度，需要注意的是，该选项还会影响Billboard Self以及XZ Plane的朝向。
+    一般特效里经常会用到random direction，如上图的配置，它的对应效果如下图：
+    所有节点以original axis为轴扩散angle around axis角
+    注意：该direction将会继承自client transform的rotation.
