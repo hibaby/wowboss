@@ -10,3 +10,7 @@ http://www.cnblogs.com/oldman/articles/2387562.html
 【Unity3d】200个插件免费分享（所有资料已上传
 http://www.bwkeji.com/a/wangzhanjichu/shujuku/20121027/20466.html
 
+
+Unity使用系统字体
+Unity中的ShaderLab（一） 
+http://www.cnblogs.com/gameprogram
