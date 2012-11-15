@@ -7,7 +7,12 @@ public class GameSystem : MonoBehaviour {
 	static private GamePrefabs gps;
 	public static void MakeFloor() {
 		CheckInit();
-		DestroyFloor();
+		
+		Vector3 postion = new Vector3( 0.0f, 0.0f, 0.0f );
+		Quaternion rotation = new Quaternion( 0.0f, 0.0f, 0.0f, 0.0f );
+		Instantiate( gps.prefabBattlefiled, postion, rotation);
+		
+/*		DestroyFloor();
 		for ( int y=0; y<9; ++y )
 		{
 			for ( int x=0; x<9; ++x )
@@ -17,6 +22,7 @@ public class GameSystem : MonoBehaviour {
 				Instantiate( gps.prefabBlockFloor, postion, rotation);
 			}
 		}
+*/
 	}
 	
 	static public void Find() {
@@ -38,7 +44,7 @@ public class GameSystem : MonoBehaviour {
 	
 	static void DestroyFloor() {
 		GameObject[] gos;
-		gos = GameObject.FindGameObjectsWithTag(gps.prefabBlockFloor.tag);  
+		gos = GameObject.FindGameObjectsWithTag(gps.prefabBattlefiled.tag);  
 		foreach (GameObject go in gos) 
 		{            
 			Destroy(go);

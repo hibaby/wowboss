@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GamePrefabs : MonoBehaviour {
 	
-	public GameObject prefabBlockFloor;
+	public GameObject prefabBattlefiled;
 
 	// Use this for initialization
 	void Start () {
