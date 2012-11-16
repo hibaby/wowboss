@@ -8,16 +8,19 @@ public class ControllerSystem : MonoBehaviour {
 		, ANI_STEP_ACTION2POSTURE
 		, ANI_STEP_POSTURE2ACTION
 	}
-	public string sAction = "jog";
+	public AnimationClip ActionAttack;
+	public AnimationClip ActionDefend;
+	public AnimationClip PostureCombat;
+	public string sAction = "idle";
 	public string sPosture = "idle";
 	public bool bAction = false;
 	public bool bPosture = false;
  	public ANI_STEP aniStep = ANI_STEP.ANI_STEP_POSTURE;
 	// Use this for initialization
 	void Start () {
-		animation["idle"].wrapMode = WrapMode.Loop;
-		animation["run"].wrapMode = WrapMode.Loop;
-		animation.Play( sPosture );
+		animation[PostureCombat.name].wrapMode = WrapMode.Loop;
+		animation.Play( PostureCombat.name );
+		sPosture = PostureCombat.name;
 	}
 	
 	// Update is called once per frame
@@ -44,12 +47,13 @@ public class ControllerSystem : MonoBehaviour {
 		}
 	}
 	
-	void DoAction(string action) {
+	public void DoAction(string action) {
+		sAction = action;
 		animation.CrossFade( action );			
 		aniStep = ANI_STEP.ANI_STEP_POSTURE2ACTION;
 	}
 	
-	void DoPosture(string posture) {
+	public void DoPosture(string posture) {
 		if ( aniStep == ANI_STEP.ANI_STEP_POSTURE2ACTION 
 			|| aniStep == ANI_STEP.ANI_STEP_ACTION )
 		{

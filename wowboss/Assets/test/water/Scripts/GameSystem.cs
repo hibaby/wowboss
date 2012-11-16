@@ -8,9 +8,16 @@ public class GameSystem : MonoBehaviour {
 	public static void MakeFloor() {
 		CheckInit();
 		
+		GameObject go =  GameObject.Find("Battlefiled");
+		go.GetComponent<Battlefiled>().NewBattle();
+		go.GetComponent<BattlefiledView>().NewBattlefiled();
+/*		
 		Vector3 postion = new Vector3( 0.0f, 0.0f, 0.0f );
 		Quaternion rotation = new Quaternion( 0.0f, 0.0f, 0.0f, 0.0f );
-		Instantiate( gps.prefabBattlefiled, postion, rotation);
+		GameObject go = Instantiate( gps.prefabBattlefiled, postion, rotation) as GameObject;
+		BattlefiledView bv = go.GetComponent<BattlefiledView>();
+		bv.NewBattlefiled();
+*/		
 		
 /*		DestroyFloor();
 		for ( int y=0; y<9; ++y )
@@ -39,15 +46,6 @@ public class GameSystem : MonoBehaviour {
 		if ( !bInit )
 		{
 			Init();
-		}
-	}
-	
-	static void DestroyFloor() {
-		GameObject[] gos;
-		gos = GameObject.FindGameObjectsWithTag(gps.prefabBattlefiled.tag);  
-		foreach (GameObject go in gos) 
-		{            
-			Destroy(go);
 		}
 	}
 }

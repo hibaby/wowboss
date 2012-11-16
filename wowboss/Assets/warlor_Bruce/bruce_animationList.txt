@@ -1,0 +1,23 @@
+ Animation list. (Motion Mixer animation sequences)
+
+1) Bruce_combat_mode.bip: 0 – 60 fr.,
+2) Bruce_windmill_blow.bip: 61 – 101 fr.,
+3) Bruce_left_stright_blow.bip: 102 – 132 fr.,
+4) Bruce_right_stright_blow.bip: 133 – 163 fr.,
+5) Bruce_scissors_blow.bip: 164 – 209 fr.,
+6) Bruce_stright_dowble_blow.bip: 165 – 255 fr.,
+7) Bruce_two_stright_blows.bip: 256 – 301 fr.,
+8) Bruce_two_stright_jump_blows.bip: 302 – 347 fr.,
+9) Bruce_two_stabbing_attacks.bip: 348 – 389 fr.,
+10) Bruce_combat_looking_left.bip: 390 – 475 fr.,
+11) Bruce_combat_looking_right.bip: 476 – 561 fr.,
+12) Bruce_taking_hit.bip: 562 – 607 fr.,
+13) Bruce_combat_move_back.bip: 608 – 628 fr.,
+14) Bruce_combat_move_front.bip: 629 – 649 fr.,
+15) Bruce_combat_move_left.bip: 650 – 670 fr.,
+16) Bruce_combat_move_right.bip: 671 – 691 fr.,
+17) Bruce_defending.bip: 692 – 730 fr.,
+18) Bruce_daying.bip: 731 – 796 fr.,
+19) Bruce_run.bip: 797 – 819 fr.,
+20) Bruce_walk.bip: 820 – 855 fr.,
+
