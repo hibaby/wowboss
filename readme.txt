@@ -1,4 +1,5 @@
 .gitignore	git忽略文件配置
+effects		unity3d效果测试工程
 wowboss		unity3d测试工程
 ServerDemo	服务器测试工程
 

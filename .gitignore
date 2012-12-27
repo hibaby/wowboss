@@ -21,6 +21,16 @@ wowboss/*.userprefs
 wowboss/*.pidb
 wowboss/Library
 
+effects/effects_Data
+effects/*.apk
+effects/*.exe
+effects/*.unityproj
+effects/*.csproj
+effects/*.sln
+effects/*.userprefs
+effects/*.pidb
+effects/Library
+
 # ºöÂÔvs2010ÎÄ¼ş
 *.sdf
 *.suo
