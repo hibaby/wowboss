@@ -26,6 +26,13 @@ Shader "Custom/AlphaMask" {
                 sampler2D _MaskTex;
                 fixed4 _Color;
                 float _Progress;
+                // float4 vertex is the vertex position
+				// float3 normal is the vertex normal
+				// float4 texcoord is the first UV coordinate
+				// float4 texcoord1 is the second UV coordinate
+				// float4 tangent is the tangent vector (used for normal mapping)
+				// float4 color is per-vertex color
+				
                 struct appdata
                 {
                     float4 vertex : POSITION;

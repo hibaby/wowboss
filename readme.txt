@@ -15,3 +15,12 @@ http://www.bwkeji.com/a/wangzhanjichu/shujuku/20121027/20466.html
 Unity使用系统字体
 Unity中的ShaderLab（一） 
 http://www.cnblogs.com/gameprogram
+
+风宇冲Unity3D教程学院
+http://blog.sina.com.cn/s/blog_471132920101dfth.html
+
+【Unity】被建筑物遮挡的player的shader表示 
+http://bbs.9ria.com/thread-121049-1-1.html
+
+Unity Developer Network
+http://answers.unity3d.com/questions/14770/creating-a-circular-progressbar-timer.html
