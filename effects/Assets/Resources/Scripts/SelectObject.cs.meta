@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 06ea7c067d69bee43aa2acdfc593f07b
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - outterLineCamera: {instanceID: 0}
+  - compositeShader: {fileID: 4800000, guid: e28919f671079fe4aae090cc474500ba, type: 1}
+  - blurShader: {fileID: 4800000, guid: a236887aa682e4541b287bd860670d7c, type: 1}
+  - cutoffShader: {fileID: 4800000, guid: 5688e431f0dd08e4e8cf006df489a77a, type: 1}
+  executionOrder: 0
+  icon: {instanceID: 0}
