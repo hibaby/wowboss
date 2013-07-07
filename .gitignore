@@ -21,7 +21,11 @@ wowboss/*.userprefs
 wowboss/*.pidb
 wowboss/Library
 
+MyStock/Debug
+MyStock/MyStock/Debug
+
 # ºöÂÔvs2010ÎÄ¼þ
 *.sdf
 *.suo
 *.opensdf
+*.aps
