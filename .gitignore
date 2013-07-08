@@ -31,7 +31,11 @@ effects/*.userprefs
 effects/*.pidb
 effects/Library
 
+MyStock/Debug
+MyStock/MyStock/Debug
+
 # ºöÂÔvs2010ÎÄ¼ş
 *.sdf
 *.suo
 *.opensdf
+*.aps
