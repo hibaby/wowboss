@@ -101,6 +101,7 @@ BEGIN_MESSAGE_MAP(CMyStockDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_WM_KEYUP()
 	ON_WM_HOTKEY()
+	ON_WM_LBUTTONDOWN()
 	ON_WM_LBUTTONUP()
 	ON_WM_MOUSEMOVE()
 	ON_WM_ERASEBKGND()
@@ -300,7 +301,7 @@ void CMyStockDlg::OnMouseMove(UINT nFlags, CPoint point)
 		return;
 	}
 	m_ptLastMousePos = point;
-
+	
 	if ( nFlags & MK_LBUTTON == MK_LBUTTON)
 	{
 
@@ -351,10 +352,11 @@ void CMyStockDlg::DrawChart(CDC& dc)
 		m_ChartUnitXOffest = m_stockTradeDates.size()-num;
 		assert(m_ChartUnitXOffest>=0);
 	}
+	TRACE("m_ChartUnitXOffest = %d\n", m_ChartUnitXOffest);
 	for ( int i=0; i<num; ++i )
 	{
 		TradeDate& td = m_stockTradeDates[num-i-1+m_ChartUnitXOffest];
-		DrawTradeDate( dc, i, num, td );
+		DrawTradeDate( dc, i, num, num-i-1+m_ChartUnitXOffest, td );
 	}
 
 	DrawTradeDateDetail(dc, num);
@@ -366,7 +368,7 @@ void CMyStockDlg::DrawBG(CDC& dc)
 	dc.FillRect(&rtChart,&m_BrushBG);
 }
 
-void CMyStockDlg::DrawTradeDate(CDC& dc, int index, int indexNum, const TradeDate& td)
+void CMyStockDlg::DrawTradeDate(CDC& dc, int index, int indexNum, int index2, const TradeDate& td)
 {
 	if ( td.volume == 0 )
 	{
@@ -435,7 +437,7 @@ void CMyStockDlg::DrawTradeDate(CDC& dc, int index, int indexNum, const TradeDat
 		rt.top	= rtChart.bottom-yUnit*(td.low-priceLow);
 		rt.bottom = rt.top + 20;
 		char szStr[256] = "";
-		sprintf( szStr, "%d", index );
+		sprintf( szStr, "%d", index2 );
 		//dc.Rectangle(&rt);
 		//dc.SetTextColor(RGB(0,0,0));
 		//SetBkColor SetBkMode 		 
@@ -571,7 +573,11 @@ struct float2DWORD
 void CMyStockDlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	const char* fileName = "D:\\My Documents\\Downloads\\table (5).csv";
+	// http://table.finance.yahoo.com/table.csv?s=0777.hk
+	// http://table.finance.yahoo.com/table.csv?s=0777.hk&f=aa5
+	// http://download.finance.yahoo.com/d/quotes.csv?s=0777.hk&f=nd1t1k1k2k3l1v
+
+	const char* fileName = "table.csv";
 	FILE* f = fopen( fileName, "r" );
 	if ( f )
 	{

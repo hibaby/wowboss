@@ -66,7 +66,7 @@ protected:
 	void CalculateChartView();
 	void DrawChart(CDC& dc);
 	void DrawBG(CDC& dc);
-	void DrawTradeDate(CDC& dc, int index, int indexNum, const TradeDate& td);
+	void DrawTradeDate(CDC& dc, int index, int indexNum, int index2, const TradeDate& td);
 	void DrawTradeDateDetail(CDC& dc, int indexNum);
 
 	// 生成的消息映射函数
