@@ -34,8 +34,16 @@ effects/Library
 MyStock/Debug
 MyStock/MyStock/Debug
 
+me/Release
+me/test/Release
+
 # 忽略vs2010文件
 *.sdf
 *.suo
 *.opensdf
 *.aps
+
+# 忽略vc6文件
+*.ncb
+*.opt
+*.plg
