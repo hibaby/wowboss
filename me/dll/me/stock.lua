@@ -33,7 +33,7 @@ local	stkDataType		= 0
 local	stkDatas		= {}
 local	stkDataNum		= 0
 
-function UpdateStk()
+function UpdateStk(UpdateCB)
 	local stk	= EnvGetStkLabel()
 	local dt	= EnvGetDataType()
 	local dn	= EnvGetNumData()
@@ -58,6 +58,8 @@ function UpdateStk()
 		data.volume		= EnvGetDataVolume(i)
 		stkDatas[i]	= data
 	end
+	
+	UpdateCB()
 	
 end
 
