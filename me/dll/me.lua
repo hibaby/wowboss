@@ -6,6 +6,8 @@ local common	= require "me.common"
 local dbg		= common.dbg
 local m			= require "me.main"
 
+require "me.test.testmath"
+
 --A:"me@CALLFUNCVAR"(CLOSE,1,2,3);	
 function CallFunc()
 	dbg.message("Enter CallFunc()\n")

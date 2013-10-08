@@ -30,7 +30,11 @@ local	DT_MULTI_DATA	= 11				--多日
 
 local	stkLabel		= ""
 local	stkDataType		= 0
-local	stkDatas		= {}
+local	stkDataOpen		= {}
+local	stkDataHigh		= {}
+local	stkDataLow		= {}
+local	stkDataClose	= {}
+local	stkDataVolume	= {}
 local	stkDataNum		= 0
 
 function UpdateStk(UpdateCB)
@@ -50,17 +54,39 @@ function UpdateStk(UpdateCB)
 	dbg.message("UpdateStk(%s,%d,%d)\n", stkLabel, stkDataType, stkDataNum)
 	
 	for i=0,stkDataNum-1,1 do
-		local data = {}
-		data.open		= EnvGetDataOpen(i)
-		data.high		= EnvGetDataHigh(i)
-		data.low		= EnvGetDataLow(i)
-		data.close		= EnvGetDataClose(i)
-		data.volume		= EnvGetDataVolume(i)
-		stkDatas[i]	= data
+		stkDataOpen[i]		= EnvGetDataOpen(i)
+		stkDataHigh[i]		= EnvGetDataHigh(i)
+		stkDataLow[i]		= EnvGetDataLow(i)
+		stkDataClose[i]		= EnvGetDataClose(i)
+		stkDataVolume[i]	= EnvGetDataVolume(i)
 	end
 	
 	UpdateCB()
 	
+end
+
+function DataNum()
+	return stkDataNum
+end
+
+function Open()
+	return stkDataOpen
+end
+
+function High()
+	return stkDataHigh
+end
+
+function Low()
+	return stkDataLow
+end
+
+function Close()
+	return stkDataClose
+end
+
+function Volume()
+	return stkDataVolume
 end
 
 --返回模块
